@@ -1,4 +1,23 @@
 {% extends "base.html.j2" %}
 {% block content %}
-  <p>This sign up page</p>
+  <form class="form-signin" role="form" method="post" action="">
+    {{ form.csrf_token }}
+
+    <p>{{ form.first_name(placeholder="Firstname") }}</p>
+
+    <p>{{ form.last_name(placeholder="Lastname") }}</p>
+    
+    <p>{{ form.email(placeholder="Email") }}</p>
+
+    <p>{{ form.student_id(placeholder="Student ID") }}</p>
+
+    <p>{{ form.phone_num(placeholder="Phone no.") }}</p>
+
+    <p>{{ form.password(placeholder="Password") }}</p>
+
+    <p>{{ form.confirm_password(placeholder="Confirm Password") }}</p>
+
+    <p><button type="submit" class="btn btn-primary">Sign Up</button></p>
+
+  </form>
 {% endblock %}
