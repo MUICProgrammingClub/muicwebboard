@@ -14,6 +14,7 @@ by muic-programming club
 8. `pip install sqlalchemy-migrate`
 9. `pip install flask-whooshalchemy`
 10. `pip install flask-wtf`
+11. `pip install flask-bcrypt`
 
 * To stop using virtual environment, simply type `deactivate` in the terminal
 
