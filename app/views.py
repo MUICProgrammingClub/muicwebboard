@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, session, url_for, request
+from flask import render_template, flash, redirect, url_for, request, session
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from sqlalchemy.exc import IntegrityError
 from app import app, bcrypt, db, lm
@@ -32,6 +32,7 @@ def signup():
       db.session.add(user)
       db.session.commit()
       login_user(user)
+      session['logged_in'] = True
       return redirect(url_for('index'))
 
     except IntegrityError: # Prevent user from having multiple account
@@ -41,10 +42,27 @@ def signup():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-  if request.method == 'GET':
-    return render_template('login.html.j2')
+  form = LoginForm(request.form)
+  if request.method == 'POST':
+    if form.validate_on_submit():
+      user = User.query.filter_by(email=request.form['email']).first()
+      if user is not None and bcrypt.check_password_hash(user.password, request.form['password']):
+        login_user(user)
+        session['logged_in'] = True
+        flash('You were logged in!')
+        return redirect(url_for('index'))
+      else:
+        flash('Invalid email or password!')
+  
+  # If user already logged in
+  if 'logged_in' in session and session['logged_in'] == True:
+    return redirect(url_for('index'))
+
+  return render_template('login.html.j2', form=form)
 
 @app.route('/logout')
+@login_required
 def logout():
-  session.pop('username', None)
+  logout_user()
+  session.pop('logged_in', None)
   return redirect(url_for('index'))
