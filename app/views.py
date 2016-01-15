@@ -1,5 +1,6 @@
 from flask import render_template, flash, redirect, session, url_for, request
 from flask.ext.login import login_user, logout_user, current_user, login_required
+from sqlalchemy.exc import IntegrityError
 from app import app, bcrypt, db, lm
 from form import SignupForm, LoginForm
 from models import User
@@ -26,10 +27,16 @@ def signup():
         password=form.password.data
       )
     user.remove_dash_from_phone_num()
-    db.session.add(user)
-    db.session.commit()
-    login_user(user)
-    return redirect(url_for('index'))
+
+    try:
+      db.session.add(user)
+      db.session.commit()
+      login_user(user)
+      return redirect(url_for('index'))
+
+    except IntegrityError: # Prevent user from having multiple account
+      flash("The Student ID already exist in the system!")
+
   return render_template('signup.html.j2', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])

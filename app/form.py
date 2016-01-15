@@ -9,7 +9,7 @@ class SignupForm(Form):
   student_id = TextField('student_id', validators=[DataRequired()])
   phone_num = TextField('phone_num', validators=[DataRequired()])
   password = PasswordField('password', validators=[DataRequired(), Length(min=6, max=25)])
-  confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password', message='Passwords must match.')])
+  confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password', message='Passwords must match!')])
 
 class LoginForm(Form):
   email = TextField('Email', validators=[DataRequired()])

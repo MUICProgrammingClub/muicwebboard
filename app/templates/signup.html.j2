@@ -3,19 +3,82 @@
   <form class="form-signin" role="form" method="post" action="">
     {{ form.csrf_token }}
 
-    <p>{{ form.first_name(placeholder="Firstname") }}</p>
+    <p>
+      {{ form.first_name(placeholder="Firstname") }}
+      <span class="error">
+        {% if form.first_name.errors %}
+          {% for error in form.first_name.errors %}
+            {{ error }}
+          {% endfor %}
+        {% endif %}
+      </span>
+    </p>
 
-    <p>{{ form.last_name(placeholder="Lastname") }}</p>
+    <p>
+      {{ form.last_name(placeholder="Lastname") }}
+      <span class="error">
+        {% if form.last_name.errors %}
+          {% for error in form.last_name.errors %}
+            {{ error }}
+          {% endfor %}
+        {% endif %}
+      </span>
+    </p>
     
-    <p>{{ form.email(placeholder="Email") }}</p>
+    <p>
+      {{ form.email(placeholder="Email") }}
+      <span class="error">
+        {% if form.email.errors %}
+          {% for error in form.email.errors %}
+            {{ error }}
+          {% endfor %}
+        {% endif %}
+      </span>
+    </p>
 
-    <p>{{ form.student_id(placeholder="Student ID") }}</p>
+    <p>
+      {{ form.student_id(placeholder="Student ID") }}
+      <span class="error">
+        {% if form.student_id.errors %}
+          {% for error in form.student_id.errors %}
+            {{ error }}
+          {% endfor %}
+        {% endif %}
+      </span>
+    </p>
 
-    <p>{{ form.phone_num(placeholder="Phone no.") }}</p>
+    <p>
+      {{ form.phone_num(placeholder="Phone no.") }}
+      <span class="error">
+        {% if form.phone_num.errors %}
+          {% for error in form.phone_num.errors %}
+            {{ error }}
+          {% endfor %}
+        {% endif %}
+      </span>
+    </p>
 
-    <p>{{ form.password(placeholder="Password") }}</p>
+    <p>
+      {{ form.password(placeholder="Password") }}
+      <span class="error">
+        {% if form.password.errors %}
+          {% for error in form.password.errors %}
+            {{ error }}
+          {% endfor %}
+        {% endif %}
+      </span>
+    </p>
 
-    <p>{{ form.confirm_password(placeholder="Confirm Password") }}</p>
+    <p>
+      {{ form.confirm_password(placeholder="Confirm Password") }}
+      <span class="error">
+        {% if form.confirm_password.errors %}
+          {% for error in form.confirm_password.errors %}
+            {{ error }}
+          {% endfor %}
+        {% endif %}
+      </span>
+    </p>
 
     <p><button type="submit" class="btn btn-primary">Sign Up</button></p>
 
