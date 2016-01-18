@@ -16,6 +16,16 @@ textarea {
   text-align: center;
 }
 
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.element{
+  .center-block()
+}
+
 .center h1 {
   margin-bottom: 10px;
 }
