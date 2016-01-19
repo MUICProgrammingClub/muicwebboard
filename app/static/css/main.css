@@ -36,8 +36,20 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1;
 }
 
+.title-orange{
+  color: #FBB03B
+}
+
+.title-darkerorange{
+  color: #F15A24
+}
+
+.bg-color-orange {
+  background-color: #FBB03B
+}
+
 h1 {
-  font-size: 3em;
+  font-size: 5em;
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
@@ -55,4 +67,21 @@ h2 {
 p {
   font-size: 1.1em;
   line-height: 1.7em;
+}
+
+.li-custom{
+  padding-right: 1.5em;
+  pointer-events:none;
+}
+
+.bg-color-white{
+  background-color: #fff;
+  border-bottom-color: #fff;
+}
+
+.btn-lg.round{
+  border-radius: 24px;
+}
+.paddle-top{
+  padding-left: 50px;
 }
