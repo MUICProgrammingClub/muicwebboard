@@ -1,7 +1,7 @@
 /* universal */
 
 body {
-  padding-top: 60px;
+  padding-top: 30px;
 }
 
 section {
@@ -79,9 +79,6 @@ p {
   border-bottom-color: #fff;
 }
 
-.btn-lg.round{
+.btn-style-round{
   border-radius: 24px;
-}
-.paddle-top{
-  padding-left: 50px;
 }
