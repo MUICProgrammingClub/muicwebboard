@@ -1,9 +1,9 @@
 {% extends "base.html.j2" %}
 {% block content %}
-  <form class="form-signin" role="form" method="post" action="">
+  <h2>Registration and Activate account</h2>
+  <form class="form-signup" role="form" method="post" action="">
+  <p>
     {{ form.csrf_token }}
-
-    <p>
       {{ form.first_name(placeholder="Firstname") }}
       <span class="error">
         {% if form.first_name.errors %}
@@ -25,7 +25,7 @@
       </span>
     </p>
     
-    <p>
+     <p>
       {{ form.email(placeholder="Email") }}
       <span class="error">
         {% if form.email.errors %}
@@ -55,8 +55,7 @@
             {{ error }}
           {% endfor %}
         {% endif %}
-      </span>
-    </p>
+      </p>
 
     <p>
       {{ form.password(placeholder="Password") }}
@@ -81,6 +80,6 @@
     </p>
 
     <p><button type="submit" class="btn btn-primary">Sign Up</button></p>
-
   </form>
+  
 {% endblock %}
