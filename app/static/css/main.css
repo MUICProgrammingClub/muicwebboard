@@ -37,11 +37,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .title-orange{
-  color: #FBB03B
+  color: #FBB03B;
+}
+.title-white{
+  color: #fff;
 }
 
 .title-darkerorange{
-  color: #F15A24
+  color: #F15A24;
 }
 
 .bg-color-orange {
@@ -94,3 +97,7 @@ p {
   color: #000;
 }
 
+
+.title-size{
+  font-size: 3em;
+}
