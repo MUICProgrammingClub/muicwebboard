@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lect_name: MyString
+  string: MyString
+  term_id: MyString
+  string: MyString
+  chapter: MyString
+  string: MyString
+  description: MyString
+  string: MyString
+
+two:
+  lect_name: MyString
+  string: MyString
+  term_id: MyString
+  string: MyString
+  chapter: MyString
+  string: MyString
+  description: MyString
+  string: MyString
