@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Lectures</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Lect name</th>
+      <th>String</th>
+      <th>Term</th>
+      <th>String</th>
+      <th>Chapter</th>
+      <th>String</th>
+      <th>Description</th>
+      <th>String</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lectures.each do |lecture| %>
+      <tr>
+        <td><%= lecture.lect_name %></td>
+        <td><%= lecture.string %></td>
+        <td><%= lecture.term_id %></td>
+        <td><%= lecture.string %></td>
+        <td><%= lecture.chapter %></td>
+        <td><%= lecture.string %></td>
+        <td><%= lecture.description %></td>
+        <td><%= lecture.string %></td>
+        <td><%= link_to 'Show', lecture %></td>
+        <td><%= link_to 'Edit', edit_lecture_path(lecture) %></td>
+        <td><%= link_to 'Destroy', lecture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Lecture', new_lecture_path %>
