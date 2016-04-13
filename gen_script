@@ -1,0 +1,8 @@
+#!/bin/bash
+
+rails g scaffold User first_name:text last_name:text email:text student_id:integer phone_num:text password:text
+rails g scaffold Course course_code:text course_name:text 
+rails g model Instructor first_name:text last_name:text
+rails g scaffold Lecture user:references course:references instructor:references lect_name:text term_id:text chapter:text description:text total_rating:float
+rails g model Review user:references lecture:references content:text rating:integer
+rails g model LectureFile lecture:references user:references
