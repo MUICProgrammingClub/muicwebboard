@@ -15,6 +15,10 @@
 #  last_sign_in_ip        :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  first_name             :text
+#  last_name              :text
+#  student_id_number      :integer
+#  phone_number           :text
 #
 
 class User < ActiveRecord::Base
@@ -22,4 +26,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  has_many :lectures
+  has_many :lecture_files
+  has_many :reviews
 end

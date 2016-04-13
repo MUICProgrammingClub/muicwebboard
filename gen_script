@@ -1,8 +1,9 @@
 #!/bin/bash
 
-rails g scaffold User first_name:text last_name:text email:text student_id:integer phone_num:text password:text
-rails g scaffold Course course_code:text course_name:text 
+rails g migration add_attributes_to_users first_name:text last_name:text student_id_number:integer phone_number:text
+rails g model Course course_code:text course_name:text
 rails g model Instructor first_name:text last_name:text
-rails g scaffold Lecture user:references course:references instructor:references lect_name:text term_id:text chapter:text description:text total_rating:float
-rails g model Review user:references lecture:references content:text rating:integer
+rails g model Term term_formatted:text
+rails g scaffold Lecture user:references course:references instructor:references term:references lecture_name:text chapter:text description:text
 rails g model LectureFile lecture:references user:references
+rails g scaffold Review user:references lecture:references content:text rating:integer

@@ -1,0 +1,37 @@
+<p>
+  <strong>User:</strong>
+  <%= @lecture.user %>
+</p>
+
+<p>
+  <strong>Course:</strong>
+  <%= @lecture.course %>
+</p>
+
+<p>
+  <strong>Instructor:</strong>
+  <%= @lecture.instructor %>
+</p>
+
+<p>
+  <strong>Term:</strong>
+  <%= @lecture.term %>
+</p>
+
+<p>
+  <strong>Lecture name:</strong>
+  <%= @lecture.lecture_name %>
+</p>
+
+<p>
+  <strong>Chapter:</strong>
+  <%= @lecture.chapter %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @lecture.description %>
+</p>
+
+<%= link_to 'Edit', edit_lecture_path(@lecture) %> |
+<%= link_to 'Back', lectures_path %>

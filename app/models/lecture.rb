@@ -14,10 +14,12 @@
 #  updated_at    :datetime         not null
 #
 
-require 'test_helper'
+class Lecture < ActiveRecord::Base
+  belongs_to :user
+  belongs_to :course
+  belongs_to :instructor
+  belongs_to :term
 
-class LectureTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  has_many :lecture_files
+  has_many :reviews
 end

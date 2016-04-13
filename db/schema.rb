@@ -11,7 +11,66 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413160545) do
+ActiveRecord::Schema.define(version: 20160413172919) do
+
+  create_table "courses", force: :cascade do |t|
+    t.text     "course_code"
+    t.text     "course_name"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "instructors", force: :cascade do |t|
+    t.text     "first_name"
+    t.text     "last_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lecture_files", force: :cascade do |t|
+    t.integer  "lecture_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "lecture_files", ["lecture_id"], name: "index_lecture_files_on_lecture_id"
+  add_index "lecture_files", ["user_id"], name: "index_lecture_files_on_user_id"
+
+  create_table "lectures", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.integer  "instructor_id"
+    t.integer  "term_id"
+    t.text     "lecture_name"
+    t.text     "chapter"
+    t.text     "description"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "lectures", ["course_id"], name: "index_lectures_on_course_id"
+  add_index "lectures", ["instructor_id"], name: "index_lectures_on_instructor_id"
+  add_index "lectures", ["term_id"], name: "index_lectures_on_term_id"
+  add_index "lectures", ["user_id"], name: "index_lectures_on_user_id"
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "lecture_id"
+    t.text     "content"
+    t.integer  "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "reviews", ["lecture_id"], name: "index_reviews_on_lecture_id"
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id"
+
+  create_table "terms", force: :cascade do |t|
+    t.text     "term_formatted"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -26,6 +85,10 @@ ActiveRecord::Schema.define(version: 20160413160545) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.text     "first_name"
+    t.text     "last_name"
+    t.integer  "student_id_number"
+    t.text     "phone_number"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
