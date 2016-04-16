@@ -1,4 +1,4 @@
-<%= form_for(@lecture) do |f| %>
+<%= form_for(@lecture, :html => {:multipart => true}) do |f| %>
   <% if @lecture.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@lecture.errors.count, "error") %> prohibited this lecture from being saved:</h2>
@@ -36,15 +36,13 @@
     <%= f.label :description %><br>
     <%= f.text_area :description ,:class => 'form-control' %>
   </div>
-  <div class="form-group">
-    Upload your pdf or single image file here <br>
-    <%= f.file_field :file, as: :file %> 
-  </div>
 
   <div class="form-group">
-    If you have mutiple images upload it here<br>
-    <%= file_field_tag "lecture_files[]", type: :file, multiple: true %>
+    Upload your lecture notes <small> (you can upload multiple files) </small><br>
+    <%= file_field_tag 'lecture_files[]', type: :file, multiple: true %>
+  </div>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => 'btn btn-default' %>
   </div>
 <% end %>

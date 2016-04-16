@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160416072326) do
+ActiveRecord::Schema.define(version: 20160416145348) do
 
   create_table "courses", force: :cascade do |t|
     t.text     "course_code"
@@ -36,6 +36,10 @@ ActiveRecord::Schema.define(version: 20160416072326) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
   end
 
   add_index "lecture_files", ["lecture_id"], name: "index_lecture_files_on_lecture_id"

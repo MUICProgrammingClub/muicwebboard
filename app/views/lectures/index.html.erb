@@ -3,13 +3,13 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th >Share by</th>
+      <th>Share by</th>
       <th >Course</th>
       <th >Instructor</th>
       <th >Term</th>
       <th >Lecture name</th>
       <th >Chapter</th>
-      <th colspan="3"></th>
+      <th colspan="2"> Option </th>
     </tr>
   </thead>
 
@@ -23,7 +23,6 @@
         <td><%= link_to lecture.lecture_name, lecture %></td>
         <td><%= lecture.chapter %></td>
          <% if current_user == lecture.user %> 
-        <td><%= link_to 'Show', lecture %></td>
         <td><%= link_to 'Edit', edit_lecture_path(lecture) %></td>
         <td><%= link_to 'Destroy', lecture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
@@ -34,7 +33,7 @@
 
 <br>
 <% if user_signed_in? %>
-<%= link_to 'New Lecture', new_lecture_path %>
+<%= link_to 'New Lecture', new_lecture_path, :class => 'btn btn-default' %>
 <% else %>
 <p> Please sign in before making new lectures </p>
 <% end %> 

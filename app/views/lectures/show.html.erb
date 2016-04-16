@@ -1,7 +1,17 @@
+<h4>
+<% if current_user == @lecture.user %>
+
+<%= link_to 'Edit', edit_lecture_path(@lecture) %> |
+<% end %>
+<%= link_to 'Back to All Lecture', lectures_path %>
+</h4>
+
+<br>
+<div class="jumbotron" >
 <p>
   <strong>Shared by:</strong>
   <%= @lecture.user.first_name %><br>
-  Class: <%= @lecture.user.student_id_number.div(10000) %> 
+  <strong> Class: </strong> <%= @lecture.user.student_id_number.div(10000) %> 
 </p>
 
 <p>
@@ -33,27 +43,27 @@
   <strong>Description:</strong>
   <%= @lecture.description %>
 </p>
-<% if @lecture.file.exists? %>
-<p>
-  <strong>File Preview:</strong> <br>
-  <%= link_to image_tag(@lecture.file.url(:pdf_thumbnail), width: 200, height: 300), @lecture.file.url %>
-  <br>
-  Or Download the file here <br>
-  <%= link_to 'Download', @lecture.file.url %>
-</p>
-<% end %> 
+</div>
 
 <% if @lecture.lecture_files.first != nil %>
 
 <% if @lecture.lecture_files.first.image.exists? %>
   <p>
-      Multiple file preview: <br>
+      <h3> File preview: </h3> <br>
       <% @lecture.lecture_files.each do |img| %>
-        <%= link_to image_tag(img.image.url, width: 200, height: 300), img.image.url %> 
+        <% if img.image_content_type.include? "image" %>
+            <%= link_to image_tag(img.image.url, width: 200, height: 300), img.image.url %>
+        <% else %>
+            <%= link_to image_tag(img.image.url(:pdf_thumbnail), width: 200, height: 300), img.image.url %>    
+        <% end %> 
       <% end %>
   </p>
+  <h3> List of Files </h3>
+  <ul> 
+     <% @lecture.lecture_files.each do |img| %>
+        <li> <%= link_to img.image_file_name, img.image.url %> <small><%= img.image_content_type %></small> </li> 
+      <% end %>
+  </ul>
 <% end %>
 
 <% end %>
-<%= link_to 'Edit', edit_lecture_path(@lecture) %> |
-<%= link_to 'Back', lectures_path %>

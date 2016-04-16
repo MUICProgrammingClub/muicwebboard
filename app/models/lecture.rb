@@ -27,7 +27,6 @@ class Lecture < ActiveRecord::Base
   has_many :lecture_files, :dependent => :destroy
   has_many :reviews
 
-  has_attached_file :file, :styles => {:thumb => "100x100#" ,:pdf_thumbnail => ["", :jpg], :small => "150x150>", :medium => "200x200" } 
-  validates_attachment :file, :content_type => {:content_type => %w(image/jpeg image/jpg image/png application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document)}
+  
 
 end

@@ -29,9 +29,9 @@ class LecturesController < ApplicationController
     @lecture.user = current_user
     respond_to do |format|
       if @lecture.save
-        if params[:lecture_files]
-          params[:lecture_files].each {
-            |image| @lecture.lecture_files.create(image: image, user_id: current_user.id)
+        if !params[:lecture_files].nil?
+          params[:lecture_files].each {|file| 
+            @lecture.lecture_files.create(image: file, user_id: current_user.id)
           }
         end
         format.html { redirect_to @lecture, notice: 'Lecture was successfully created.' }
@@ -48,9 +48,9 @@ class LecturesController < ApplicationController
   def update
     respond_to do |format|
       if @lecture.update(lecture_params)
-        if params[:lecture_files]
-          params[:lecture_files].each {
-            |image| @lecture.lecture_files.create(image: image, user_id: current_user.id)
+        if !params[:lecture_files].nil?
+          params[:lecture_files].each {|file| 
+            @lecture.lecture_files.create(image: file, user_id: current_user.id)
           }
         end
         format.html { redirect_to @lecture, notice: 'Lecture was successfully updated.' }
