@@ -29,6 +29,11 @@ class LecturesController < ApplicationController
     @lecture.user = current_user
     respond_to do |format|
       if @lecture.save
+        if params[:lecture_files]
+          params[:lecture_files].each {
+            |image| @lecture.lecture_files.create(image: image, user_id: current_user.id)
+          }
+        end
         format.html { redirect_to @lecture, notice: 'Lecture was successfully created.' }
         format.json { render :show, status: :created, location: @lecture }
       else
@@ -43,6 +48,11 @@ class LecturesController < ApplicationController
   def update
     respond_to do |format|
       if @lecture.update(lecture_params)
+        if params[:lecture_files]
+          params[:lecture_files].each {
+            |image| @lecture.lecture_files.create(image: image, user_id: current_user.id)
+          }
+        end
         format.html { redirect_to @lecture, notice: 'Lecture was successfully updated.' }
         format.json { render :show, status: :ok, location: @lecture }
       else
@@ -55,6 +65,7 @@ class LecturesController < ApplicationController
   # DELETE /lectures/1
   # DELETE /lectures/1.json
   def destroy
+    LectureFile.destroy_all(id: @lecture.lecture_files)
     @lecture.destroy
     respond_to do |format|
       format.html { redirect_to lectures_url, notice: 'Lecture was successfully destroyed.' }

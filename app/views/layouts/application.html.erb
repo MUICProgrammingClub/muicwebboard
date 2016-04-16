@@ -3,20 +3,30 @@
 <head>
   <title>Muicwebboard</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+<nav class="navbar navbar-default navbar-static-top">
+<div class= "container">
+	<div id="navbar" class="navbar-collapse collapse">
+		<ul class="nav navbar-nav navbar-right">
+		<% if user_signed_in? %> 
+			<li><%= link_to "Sign Out", destroy_user_session_path, :method=> :delete %> </li>
+			<li> <a href="#"> Login as: <%= current_user.email %> </a> </li>
+		<% else %>
+			<li> <a href=<%= user_session_path %>> Sign In </a> </li>	
+		<% end %> 
+		</ul>
+	</div>
+</div>
+</nav>
 
-<% if user_signed_in? %> 
-<%= link_to "Sign Out", destroy_user_session_path, :method=> :delete %> &nbsp &nbsp 
-	Login as: <%= current_user.email %>
-<% else %>
-	<a href=<%= user_session_path %>> Sign In </a>	
-<% end %> 
 
+<div class="container">
 <%= yield %>
-
+</div>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>
 </html>

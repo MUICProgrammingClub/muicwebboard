@@ -33,15 +33,27 @@
   <strong>Description:</strong>
   <%= @lecture.description %>
 </p>
-
+<% if @lecture.file.exists? %>
 <p>
   <strong>File Preview:</strong> <br>
-  <img width="200" height="300" src=<%=  @lecture.file.url(:pdf_thumbnail) %> href=<%= @lecture.file.url %> >
+  <%= link_to image_tag(@lecture.file.url(:pdf_thumbnail), width: 200, height: 300), @lecture.file.url %>
   <br>
   Or Download the file here <br>
   <%= link_to 'Download', @lecture.file.url %>
-
 </p>
+<% end %> 
 
+<% if @lecture.lecture_files.first != nil %>
+
+<% if @lecture.lecture_files.first.image.exists? %>
+  <p>
+      Multiple file preview: <br>
+      <% @lecture.lecture_files.each do |img| %>
+        <%= link_to image_tag(img.image.url, width: 200, height: 300), img.image.url %> 
+      <% end %>
+  </p>
+<% end %>
+
+<% end %>
 <%= link_to 'Edit', edit_lecture_path(@lecture) %> |
 <%= link_to 'Back', lectures_path %>

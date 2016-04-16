@@ -12,35 +12,38 @@
   <% end %>
 
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :course_id %> (select the course from the dropdown menu)<br>
-    <%= f.collection_select(:course_id, Course.all, :id, :course_code) %>
+    <%= f.collection_select(:course_id, Course.all, :id, :course_code, :class => 'form-control') %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :instructor_id %><br>
     <%= f.collection_select(:instructor_id, Instructor.all, :id, :first_name) %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :term_id %> (select the term from the dropdown menu) <br>
     <%= f.collection_select(:term_id, Term.all, :id, :term_formatted) %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :lecture_name %><br>
-    <%= f.text_field :lecture_name %>
+    <%= f.text_field :lecture_name, :class => 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :chapter %><br>
-    <%= f.text_field :chapter %>
+    <%= f.text_field :chapter, :class => 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.text_area :description ,:class => 'form-control' %>
   </div>
-  <div class="field">
-    Upload your file here <br>
+  <div class="form-group">
+    Upload your pdf or single image file here <br>
     <%= f.file_field :file, as: :file %> 
   </div>
 
+  <div class="form-group">
+    If you have mutiple images upload it here<br>
+    <%= file_field_tag "lecture_files[]", type: :file, multiple: true %>
   <div class="actions">
     <%= f.submit %>
   </div>
