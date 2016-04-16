@@ -1,6 +1,7 @@
 <p>
-  <strong>User:</strong>
-  <%= @lecture.user.email %>
+  <strong>Shared by:</strong>
+  <%= @lecture.user.first_name %><br>
+  Class: <%= @lecture.user.student_id_number.div(10000) %> 
 </p>
 
 <p>

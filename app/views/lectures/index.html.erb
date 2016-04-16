@@ -3,7 +3,7 @@
 <table>
   <thead>
     <tr>
-      <th width="100px">User</th>
+      <th width="100px">Share by</th>
       <th width="100px">Course</th>
       <th width="100px">Instructor</th>
       <th width="100px">Term</th>
@@ -17,7 +17,7 @@
   <tbody>
     <% @lectures.each do |lecture| %>
       <tr>
-        <td><%= lecture.user.email %></td>
+        <td><%= lecture.user.first_name%></td>
         <td><%= lecture.course.course_name %></td>
         <td><%= lecture.instructor.first_name %></td>
         <td><%= lecture.term.term_formatted %></td>
