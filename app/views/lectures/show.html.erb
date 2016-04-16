@@ -1,21 +1,21 @@
 <p>
   <strong>User:</strong>
-  <%= @lecture.user %>
+  <%= @lecture.user.email %>
 </p>
 
 <p>
   <strong>Course:</strong>
-  <%= @lecture.course %>
+  <%= @lecture.course.course_code %> &nbsp <%= @lecture.course.course_name %> 
 </p>
 
 <p>
   <strong>Instructor:</strong>
-  <%= @lecture.instructor %>
+  <%= @lecture.instructor.first_name %> &nbsp <%= @lecture.instructor.last_name %>
 </p>
 
 <p>
   <strong>Term:</strong>
-  <%= @lecture.term %>
+  <%= @lecture.term.term_formatted %>
 </p>
 
 <p>
@@ -31,6 +31,15 @@
 <p>
   <strong>Description:</strong>
   <%= @lecture.description %>
+</p>
+
+<p>
+  <strong>File Preview:</strong> <br>
+  <img width="200" height="300" src=<%=  @lecture.file.url(:pdf_thumbnail) %> href=<%= @lecture.file.url %> >
+  <br>
+  Or Download the file here <br>
+  <%= link_to 'Download', @lecture.file.url %>
+
 </p>
 
 <%= link_to 'Edit', edit_lecture_path(@lecture) %> |

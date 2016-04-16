@@ -3,13 +3,13 @@
 <table>
   <thead>
     <tr>
-      <th>User</th>
-      <th>Course</th>
-      <th>Instructor</th>
-      <th>Term</th>
-      <th>Lecture name</th>
-      <th>Chapter</th>
-      <th>Description</th>
+      <th width="100px">User</th>
+      <th width="100px">Course</th>
+      <th width="100px">Instructor</th>
+      <th width="100px">Term</th>
+      <th width="100px">Lecture name</th>
+      <th width="100px">Chapter</th>
+      <th width="100px">Description</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,10 +17,10 @@
   <tbody>
     <% @lectures.each do |lecture| %>
       <tr>
-        <td><%= lecture.user %></td>
-        <td><%= lecture.course %></td>
-        <td><%= lecture.instructor %></td>
-        <td><%= lecture.term %></td>
+        <td><%= lecture.user.email %></td>
+        <td><%= lecture.course.course_name %></td>
+        <td><%= lecture.instructor.first_name %></td>
+        <td><%= lecture.term.term_formatted %></td>
         <td><%= lecture.lecture_name %></td>
         <td><%= lecture.chapter %></td>
         <td><%= lecture.description %></td>

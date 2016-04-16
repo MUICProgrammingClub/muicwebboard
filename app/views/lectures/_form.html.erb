@@ -11,34 +11,36 @@
     </div>
   <% end %>
 
+
   <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :course_id %><br>
-    <%= f.text_field :course_id %>
+    <%= f.label :course_id %> (select the course from the dropdown menu)<br>
+    <%= f.collection_select(:course_id, Course.all, :id, :course_code) %>
   </div>
   <div class="field">
     <%= f.label :instructor_id %><br>
-    <%= f.text_field :instructor_id %>
+    <%= f.collection_select(:instructor_id, Instructor.all, :id, :first_name) %>
   </div>
   <div class="field">
-    <%= f.label :term_id %><br>
-    <%= f.text_field :term_id %>
+    <%= f.label :term_id %> (select the term from the dropdown menu) <br>
+    <%= f.collection_select(:term_id, Term.all, :id, :term_formatted) %>
   </div>
   <div class="field">
     <%= f.label :lecture_name %><br>
-    <%= f.text_area :lecture_name %>
+    <%= f.text_field :lecture_name %>
   </div>
   <div class="field">
     <%= f.label :chapter %><br>
-    <%= f.text_area :chapter %>
+    <%= f.text_field :chapter %>
   </div>
   <div class="field">
     <%= f.label :description %><br>
     <%= f.text_area :description %>
   </div>
+  <div class="field">
+    Upload your file here <br>
+    <%= f.file_field :file, as: :file %> 
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :users, only: [:index, :show] do
-    resources :lectures
-  end
+  root to: "lectures#index"
+  resources :lectures
+
+  # resources :users, only: [:index, :show] do
+  #   resources :lectures
+  # end
 
 end

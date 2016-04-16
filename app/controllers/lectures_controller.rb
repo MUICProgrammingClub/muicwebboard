@@ -15,6 +15,7 @@ class LecturesController < ApplicationController
   # GET /lectures/new
   def new
     @lecture = Lecture.new
+
   end
 
   # GET /lectures/1/edit
@@ -25,7 +26,7 @@ class LecturesController < ApplicationController
   # POST /lectures.json
   def create
     @lecture = Lecture.new(lecture_params)
-
+    @lecture.user = current_user
     respond_to do |format|
       if @lecture.save
         format.html { redirect_to @lecture, notice: 'Lecture was successfully created.' }
@@ -69,6 +70,6 @@ class LecturesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lecture_params
-      params.require(:lecture).permit(:user_id, :course_id, :instructor_id, :term_id, :lecture_name, :chapter, :description)
+      params.require(:lecture).permit(:user_id, :course_id, :instructor_id, :term_id, :lecture_name, :chapter, :description, :file)
     end
 end
