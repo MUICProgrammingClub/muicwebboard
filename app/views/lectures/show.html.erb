@@ -66,18 +66,27 @@
   </ul>
 <% end %>
 <% end %>
+
+
 <div class="container">
   <div class= "well">
-  <% if @lecture.user.reviews.first == nil %>
+  <% logger.debug "the boolean value #{@lecture.reviews.find_by(lecture_id: @lecture.id ) != nil && params[:edited] != '1' }" %>
+  <% if @lecture.reviews.find_by(lecture_id: @lecture.id ) == nil || params[:edited] %>
+  <% logger.debug "Should render form" %>
+      <% if @lecture.reviews.find_by(lecture_id: @lecture.id ) != nil %>
+        <% @review = @lecture.reviews.find_by(lecture_id: @lecture.id ) %>
+      <% end %>
    <%= render 'reviews/form' %>
   <% elsif @lecture.user == current_user %>
     <p> <strong> You cannot review your own lecture </strong> </p>
   <% else %>
-    <% my_review = @lecture.reviews.first %>
+  <% if @lecture.reviews.find_by(lecture_id: @lecture.id ) != nil && !params[:edited] %>
+    <% my_review = @lecture.reviews.find_by(lecture_id: @lecture.id ) %>
     <p> <strong> Your Review </strong> <small> You can only make 1 review per lecture </small>  </p>
     <p> <%= my_review.content %> </p>
-          <%= link_to 'Edit', lectures_path %> |
-          <%= link_to 'Destroy', my_review, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Edit', edit_review_lecture_path(@lecture, :edited => '1') , method: :put%> |
+          <%= link_to 'Delete review', my_review, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
   <% end %> 
   </div>
 <div class="well well-lg">
@@ -88,8 +97,8 @@
         <br>
         <p> <%= review.content %> </p>
         <% if current_user == review.user %>
-          <%= link_to 'Edit', lectures_path %> |
-          <%= link_to 'Destroy', review , method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Edit', '#edit_review'%> |
+          <%= link_to 'Delete review', review , method: :delete, data: { confirm: 'Are you sure?' } %>
       <% end %>
       <% end %>
   </div>

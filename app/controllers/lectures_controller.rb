@@ -22,6 +22,10 @@ class LecturesController < ApplicationController
   def edit
   end
 
+  def edit_review
+    redirect_to lecture_path(:edited => (params[:edited] == '1'))
+  end
+
   # POST /lectures
   # POST /lectures.json
   def create
