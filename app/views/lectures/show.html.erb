@@ -67,15 +67,30 @@
 <% end %>
 <% end %>
 <div class="container">
-  <div class= "well well-lg">
-  <%= render 'reviews/form' %>
+  <div class= "well">
+  <% if @lecture.user.reviews.first == nil %>
+   <%= render 'reviews/form' %>
+  <% elsif @lecture.user == current_user %>
+    <p> <strong> You cannot review your own lecture </strong> </p>
+  <% else %>
+    <% my_review = @lecture.reviews.first %>
+    <p> <strong> Your Review </strong> <small> You can only make 1 review per lecture </small>  </p>
+    <p> <%= my_review.content %> </p>
+          <%= link_to 'Edit', lectures_path %> |
+          <%= link_to 'Destroy', my_review, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %> 
   </div>
-<div class="jumbotron">
-  <div class="well well-lg">
+<div class="well well-lg">
+  <div class="well ">
       <% @lecture.reviews.each do |review| %>
-        <strong> Review by: </strong> <%= review.user.first_name %> <br>
-        <small> <strong> Class: </strong> <%= review.user.student_id_number.div(10000) %> </small>
+        <h4> <strong> Review by: </strong> <%= review.user.first_name %> <br> </h4>
+        <h5> <strong> Class: </strong> <%= review.user.student_id_number.div(10000) %> </h5>
+        <br>
         <p> <%= review.content %> </p>
+        <% if current_user == review.user %>
+          <%= link_to 'Edit', lectures_path %> |
+          <%= link_to 'Destroy', review , method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
       <% end %>
   </div>
 <div>

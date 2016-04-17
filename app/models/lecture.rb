@@ -25,7 +25,7 @@ class Lecture < ActiveRecord::Base
   belongs_to :term
 
   has_many :lecture_files, :dependent => :destroy
-  has_many :reviews
+  has_many :reviews, :dependent => :destroy
 
   
 
