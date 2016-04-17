@@ -10,8 +10,8 @@ class LecturesController < ApplicationController
   # GET /lectures/1
   # GET /lectures/1.json
   def show
+    @review = Review.new(user_id: current_user.id, lecture_id: @lecture.id)
   end
-
   # GET /lectures/new
   def new
     @lecture = Lecture.new

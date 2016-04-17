@@ -65,5 +65,19 @@
       <% end %>
   </ul>
 <% end %>
-
 <% end %>
+<div class="container">
+  <div class= "well well-lg">
+  <%= render 'reviews/form' %>
+  </div>
+<div class="jumbotron">
+  <div class="well well-lg">
+      <% @lecture.reviews.each do |review| %>
+        <strong> Review by: </strong> <%= review.user.first_name %> <br>
+        <small> <strong> Class: </strong> <%= review.user.student_id_number.div(10000) %> </small>
+        <p> <%= review.content %> </p>
+      <% end %>
+  </div>
+<div>
+
+</div>

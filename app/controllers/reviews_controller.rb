@@ -1,37 +1,37 @@
 class ReviewsController < ApplicationController
-  before_action :set_review, only: [:show, :edit, :update, :destroy]
+  #before_action :set_review, only: [:show, :edit, :update, :destroy]
 
   # GET /reviews
   # GET /reviews.json
-  def index
-    @reviews = Review.all
-  end
+  # def index
+  #   @reviews = Review.all
+  # end
 
   # GET /reviews/1
   # GET /reviews/1.json
-  def show
-  end
+  # def show
+  # end
 
   # GET /reviews/new
-  def new
-    @review = Review.new
-  end
+  # def new
+  #   @review = Review.new
+  # end
 
   # GET /reviews/1/edit
-  def edit
-  end
+  # def edit
+  # end
 
   # POST /reviews
   # POST /reviews.json
   def create
     @review = Review.new(review_params)
-
     respond_to do |format|
       if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
-        format.json { render :show, status: :created, location: @review }
+        format.html { redirect_to @review.lecture, notice: 'Review was successfully created.' }
+        format.json { render :show, status: :created, location: @review.lecture }
       else
-        format.html { render :new }
+        @lecture = @review.lecture
+        format.html { render 'lecture/show' }
         format.json { render json: @review.errors, status: :unprocessable_entity }
       end
     end
@@ -62,13 +62,9 @@ class ReviewsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_review
-      @review = Review.find(params[:id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.require(:review).permit(:user_id, :lecture_id, :content, :rating)
+      params.require(:review).permit(:lecture_id, :user_id, :content, :rating)
     end
 end
