@@ -1,8 +1,12 @@
+<script type="text/javascript">
+$(document).ready(function() {
+  $(".js-example-basic-single").select2();
+});
+</script>
 <%= form_for(@lecture, :html => {:multipart => true}) do |f| %>
   <% if @lecture.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@lecture.errors.count, "error") %> prohibited this lecture from being saved:</h2>
-
       <ul>
       <% @lecture.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -14,15 +18,15 @@
 
   <div class="form-group">
     <%= f.label :course_id %> (select the course from the dropdown menu)<br>
-    <%= f.collection_select(:course_id, Course.all, :id, :course_code, :class => 'form-control') %>
+    <%= f.collection_select :course_id, Course.all, :id, :name_code , {prompt: "select course"}, {:class => "js-example-basic-single"} %>
   </div>
   <div class="form-group">
     <%= f.label :instructor_id %><br>
-    <%= f.collection_select(:instructor_id, Instructor.all, :id, :first_name) %>
+    <%= f.collection_select :instructor_id, Instructor.all, :id, :full_name, {prompt: "select Instructor"}, {:class => "js-example-basic-single"} %>
   </div>
   <div class="form-group">
     <%= f.label :term_id %> (select the term from the dropdown menu) <br>
-    <%= f.collection_select(:term_id, Term.all, :id, :term_formatted) %>
+    <%= f.collection_select :term_id, Term.all, :id, :term_formatted, {prompt: "Select term"}, {:class => "js-example-basic-single"} %>
   </div>
   <div class="form-group">
     <%= f.label :lecture_name %><br>
