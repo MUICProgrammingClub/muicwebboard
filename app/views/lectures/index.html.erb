@@ -1,4 +1,4 @@
-<h1>Listing Lectures</h1>
+<h1>All Lectures</h1>
 
 <table class="table table-striped">
   <thead>
@@ -9,6 +9,7 @@
       <th >Term</th>
       <th >Lecture name</th>
       <th >Chapter</th>
+      <th > Average rating </th>
       <th colspan="2"> Option </th>
     </tr>
   </thead>
@@ -22,9 +23,34 @@
         <td><%= lecture.term.term_formatted %></td>
         <td><%= link_to lecture.lecture_name, lecture %></td>
         <td><%= lecture.chapter %></td>
+        <td>
+          <% total = 0 %>
+          <% n = 0 %>
+          <% lecture.reviews.each do |review| %>
+            <% if !review.rating.nil? %>
+              <% total += review.rating %>
+              <% n += 1 %>
+            <% end %>
+          <% end %>
+          <% if total != 0 %>
+         
+          <% (1..5).each do |i| %>
+                <% if i <= total/n %>
+                  <span class="glyphicon glyphicon-star"></span>
+                <% else %>
+                  <span class= "glyphicon glyphicon-star-empty"></span>
+                <% end %> 
+          <% end %>
+          <% else %>
+            There are currently no review 
+          <% end %>
+        </td>
          <% if current_user == lecture.user %> 
         <td><%= link_to 'Edit', edit_lecture_path(lecture) %></td>
-        <td><%= link_to 'Destroy', lecture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Remove', lecture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+        <td></td>
+        <td></td>
         <% end %>
       </tr>
     <% end %>

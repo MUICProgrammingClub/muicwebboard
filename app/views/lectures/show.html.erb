@@ -7,7 +7,7 @@
 </h4>
 
 <br>
-<div class="jumbotron" >
+<div class="well well-lg" >
 <p>
   <strong>Shared by:</strong>
   <%= @lecture.user.first_name %><br>
@@ -16,12 +16,12 @@
 
 <p>
   <strong>Course:</strong>
-  <%= @lecture.course.course_code %> &nbsp <%= @lecture.course.course_name %> 
+  <%= @lecture.course.course_code %>  <%= @lecture.course.course_name %> 
 </p>
 
 <p>
   <strong>Instructor:</strong>
-  <%= @lecture.instructor.first_name %> &nbsp <%= @lecture.instructor.last_name %>
+  <%= @lecture.instructor.first_name %> <%= @lecture.instructor.last_name %>
 </p>
 
 <p>
@@ -42,6 +42,31 @@
 <p>
   <strong>Description:</strong>
   <%= @lecture.description %>
+</p>
+
+<p>
+ <strong>Average rating: </strong>
+  <% total = 0 %>
+  <% n = 0 %>
+  <% @lecture.reviews.each do |review| %>
+    <% if !review.rating.nil? %>
+      <% total += review.rating %>
+      <% n += 1 %>
+    <% end %>
+  <% end %>
+  <% if total != 0 %>
+  <%= total/n %>
+  <% (1..5).each do |i| %>
+        <% if i <= total/n %>
+          <span class="glyphicon glyphicon-star"></span>
+        <% else %>
+          <span class= "glyphicon glyphicon-star-empty"></span>
+        <% end %> 
+  <% end %>
+  <small>(review by <%= n %> people)</small>
+  <% else %>
+    There are currently no review 
+  <% end %>
 </p>
 </div>
 
@@ -71,7 +96,7 @@
 <div class="container">
   <div class= "well">
   <% logger.debug "the boolean value #{@lecture.reviews.find_by(lecture_id: @lecture.id ) != nil && params[:edited] != '1' }" %>
-  <% if @lecture.reviews.find_by(lecture_id: @lecture.id ) == nil || params[:edited] %>
+  <% if (@lecture.reviews.find_by(lecture_id: @lecture.id ) == nil || params[:edited]) && (@lecture.user != current_user)  %>
   <% logger.debug "Should render form" %>
       <% if @lecture.reviews.find_by(lecture_id: @lecture.id ) != nil %>
         <% @review = @lecture.reviews.find_by(lecture_id: @lecture.id ) %>
@@ -84,6 +109,17 @@
     <% my_review = @lecture.reviews.find_by(lecture_id: @lecture.id ) %>
     <p> <strong> Your Review </strong> <small> You can only make 1 review per lecture </small>  </p>
     <p> <%= my_review.content %> </p>
+    <% if !my_review.rating.nil? %>
+    <p> Review Score:  <%= my_review.rating %>
+    <% (1..5).each do |n| %>
+        <% if n <= my_review.rating %>
+          <span class="glyphicon glyphicon-star"></span>
+        <% else %>
+          <span class= "glyphicon glyphicon-star-empty"></span>
+        <% end %> 
+    <% end %>
+    </p>
+     <% end %>
           <%= link_to 'Edit', edit_review_lecture_path(@lecture, :edited => '1') , method: :put%> |
           <%= link_to 'Delete review', my_review, method: :delete, data: { confirm: 'Are you sure?' } %>
       <% end %>
@@ -96,10 +132,21 @@
         <h5> <strong> Class: </strong> <%= review.user.student_id_number.div(10000) %> </h5>
         <br>
         <p> <%= review.content %> </p>
-        <% if current_user == review.user %>
-          <%= link_to 'Edit', '#edit_review'%> |
-          <%= link_to 'Delete review', review , method: :delete, data: { confirm: 'Are you sure?' } %>
-      <% end %>
+        <% if !review.rating.nil? %>
+           <p> Review Score:  <%= review.rating %>
+           <% (1..5).each do |n| %>
+                 <% if n <= review.rating %>
+                     <span class="glyphicon glyphicon-star"></span>
+                <% else %>
+                       <span class= "glyphicon glyphicon-star-empty"></span>
+                <% end %> 
+            <% end %>
+           </p>
+        <% end %>
+          <% if current_user == review.user %>
+            <%= link_to 'Edit', '#edit_review'%> |
+            <%= link_to 'Delete review', review , method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
       <% end %>
   </div>
 <div>
