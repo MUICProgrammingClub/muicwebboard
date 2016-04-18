@@ -1,16 +1,19 @@
 <h4>
 <% if current_user == @lecture.user %>
-
+<%= link_to 'Delete this lecture', @lecture, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Edit', edit_lecture_path(@lecture) %> |
 <% end %>
 <%= link_to 'Back to All Lecture', lectures_path %>
 </h4>
-
+        
 <br>
 <div class="well well-lg" >
+<p style="text-align: right;"> 
+  <small><strong>Edited at:</strong> <%= @lecture.updated_at %></small>
+</p>
 <p>
   <strong>Shared by:</strong>
-  <%= @lecture.user.first_name %><br>
+  <%=link_to @lecture.user.first_name, user_path(@lecture.user.id) %><br>
   <strong> Class: </strong> <%= @lecture.user.student_id_number.div(10000) %> 
 </p>
 
@@ -128,7 +131,10 @@
 <div class="well well-lg">
   <div class="well ">
       <% @lecture.reviews.each do |review| %>
-        <h4> <strong> Review by: </strong> <%= review.user.first_name %> <br> </h4>
+        <p style="text-align: right;"> 
+            <small><strong>Edited at:</strong> <%= review.updated_at %></small>
+        </p>
+        <h4> <strong> Review by: </strong> <%=link_to review.user.first_name, user_path(review.user.id) %> <br> </h4>
         <h5> <strong> Class: </strong> <%= review.user.student_id_number.div(10000) %> </h5>
         <br>
         <p> <%= review.content %> </p>

@@ -1,21 +1,34 @@
-<h1>All Lectures</h1>
+<div class="container">
+<div class="well">
+<h1> User Profile </h1>
 
+<strong>Name:</strong><%= @user.first_name %> <%= @user.last_name %><br>
+<strong>Email: </strong> <%= @user.email %><br>
+
+<strong> Class: <%= @user.student_id_number.div(10000) %></strong> <br> 
+<strong> Phone Number: </strong> <%= @user.phone_number %> <br>
+<%= link_to 'Edit Registration Info', edit_user_registration_path %>
+</div>
+</div>
+
+<div class="container">
+<h2> User Uploaded Lecture Notes </h2>
 <table class="table table-striped">
   <thead>
     <tr>
       <th> Thumbnail </th>
-      <th>Share by</th>
       <th >Course</th>
       <th >Instructor</th>
       <th >Term</th>
       <th >Lecture name</th>
       <th >Chapter</th>
       <th > Average rating </th>
+      <th colspan="2"> Option </th>
     </tr>
   </thead>
 
   <tbody>
-    <% @lectures.each do |lecture| %>
+    <% @user.lectures.each do |lecture| %>
       <tr>
         <td>
         <% if !lecture.lecture_files.first.nil? %>
@@ -26,7 +39,6 @@
         <% end %>  
         <% end %>
         </td>
-        <td><%= link_to lecture.user.first_name, user_path(lecture.user.id) %></td>
         <td><%= lecture.course.course_name%></td>
         <td><%= lecture.instructor.first_name %></td>
         <td><%= lecture.term.term_formatted %></td>
@@ -54,14 +66,15 @@
             There are currently no review 
           <% end %>
         </td>
+         <% if current_user == lecture.user %> 
+        <td><%= link_to 'Edit', edit_lecture_path(lecture) %></td>
+        <td><%= link_to 'Remove', lecture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+        <td></td>
+        <td></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-<% if user_signed_in? %>
-<%= link_to 'New Lecture', new_lecture_path, :class => 'btn btn-default' %>
-<% else %>
-<p> Please sign in before making new lectures </p>
-<% end %> 
+</div>
