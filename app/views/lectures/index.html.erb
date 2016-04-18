@@ -27,7 +27,7 @@
         <% end %>
         </td>
         <td><%= link_to lecture.user.first_name, user_path(lecture.user.id) %></td>
-        <td><%= lecture.course.course_name%></td>
+        <td><%= lecture.course.course_code %> <%= lecture.course.course_name%></td>
         <td><%= lecture.instructor.first_name %></td>
         <td><%= lecture.term.term_formatted %></td>
         <td><%= link_to lecture.lecture_name, lecture %></td>
