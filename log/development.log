@@ -36652,3 +36652,43 @@ Processing by LecturesController#index as HTML
   [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
   Rendered lectures/index.html.erb within layouts/application (17.9ms)
 Completed 200 OK in 70ms (Views: 67.2ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/lectures/10" for 127.0.0.1 at 2016-04-18 22:03:18 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by LecturesController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mLecture Load (0.2ms)[0m  [1mSELECT  "lectures".* FROM "lectures" WHERE "lectures"."id" = ? LIMIT 1[0m  [["id", 10]]
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36mCourse Load (0.2ms)[0m  [1mSELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35mInstructor Load (0.6ms)[0m  SELECT  "instructors".* FROM "instructors" WHERE "instructors"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mTerm Load (0.3ms)[0m  [1mSELECT  "terms".* FROM "terms" WHERE "terms"."id" = ? LIMIT 1[0m  [["id", 4]]
+  [1m[35mReview Load (0.3ms)[0m  SELECT "reviews".* FROM "reviews" WHERE "reviews"."lecture_id" = ?  [["lecture_id", 10]]
+  [1m[36mLectureFile Load (0.3ms)[0m  [1mSELECT  "lecture_files".* FROM "lecture_files" WHERE "lecture_files"."lecture_id" = ?  ORDER BY "lecture_files"."id" ASC LIMIT 1[0m  [["lecture_id", 10]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "lecture_files".* FROM "lecture_files" WHERE "lecture_files"."lecture_id" = ?  ORDER BY "lecture_files"."id" ASC LIMIT 1  [["lecture_id", 10]]
+  [1m[36mLectureFile Load (0.3ms)[0m  [1mSELECT "lecture_files".* FROM "lecture_files" WHERE "lecture_files"."lecture_id" = ?[0m  [["lecture_id", 10]]
+  [1m[35mReview Load (0.2ms)[0m  SELECT  "reviews".* FROM "reviews" WHERE "reviews"."lecture_id" = ? AND "reviews"."lecture_id" = ? LIMIT 1  [["lecture_id", 10], ["lecture_id", 10]]
+the boolean value true
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "reviews".* FROM "reviews" WHERE "reviews"."lecture_id" = ? AND "reviews"."lecture_id" = ? LIMIT 1[0m  [["lecture_id", 10], ["lecture_id", 10]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "reviews".* FROM "reviews" WHERE "reviews"."lecture_id" = ? AND "reviews"."lecture_id" = ? LIMIT 1  [["lecture_id", 10], ["lecture_id", 10]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "reviews".* FROM "reviews" WHERE "reviews"."lecture_id" = ? AND "reviews"."lecture_id" = ? LIMIT 1[0m  [["lecture_id", 10], ["lecture_id", 10]]
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered lectures/show.html.erb within layouts/application (123.0ms)
+Completed 200 OK in 581ms (Views: 482.6ms | ActiveRecord: 7.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-04-18 22:03:22 +0700
+Processing by LecturesController#index as HTML
+  [1m[36mLecture Load (0.3ms)[0m  [1mSELECT "lectures".* FROM "lectures"[0m
+  [1m[35mLectureFile Load (0.2ms)[0m  SELECT  "lecture_files".* FROM "lecture_files" WHERE "lecture_files"."lecture_id" = ?  ORDER BY "lecture_files"."id" ASC LIMIT 1  [["lecture_id", 10]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "lecture_files".* FROM "lecture_files" WHERE "lecture_files"."lecture_id" = ?  ORDER BY "lecture_files"."id" ASC LIMIT 1[0m  [["lecture_id", 10]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "lecture_files".* FROM "lecture_files" WHERE "lecture_files"."lecture_id" = ?  ORDER BY "lecture_files"."id" ASC LIMIT 1  [["lecture_id", 10]]
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mCourse Load (0.1ms)[0m  SELECT  "courses".* FROM "courses" WHERE "courses"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36mInstructor Load (0.1ms)[0m  [1mSELECT  "instructors".* FROM "instructors" WHERE "instructors"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mTerm Load (0.1ms)[0m  SELECT  "terms".* FROM "terms" WHERE "terms"."id" = ? LIMIT 1  [["id", 4]]
+  [1m[36mReview Load (0.5ms)[0m  [1mSELECT "reviews".* FROM "reviews" WHERE "reviews"."lecture_id" = ?[0m  [["lecture_id", 10]]
+  [1m[35mUser Load (1.7ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered lectures/index.html.erb within layouts/application (24.6ms)
+Completed 200 OK in 73ms (Views: 68.8ms | ActiveRecord: 3.2ms)
