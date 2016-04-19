@@ -30,4 +30,15 @@ class User < ActiveRecord::Base
   has_many :lectures
   has_many :lecture_files
   has_many :reviews
+  has_many :user_roles
+
+  after_create :assign_role
+
+  private
+    # assign user's role when the user signup
+    # The default role is member
+    def assign_role
+      member_role = Role.find_by(name: "member")
+      UserRole.create!(user_id: self.id, role_id: member_role[:id])
+    end
 end
