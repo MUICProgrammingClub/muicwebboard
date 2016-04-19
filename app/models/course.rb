@@ -15,4 +15,5 @@ class Course < ActiveRecord::Base
   def name_code
   		"#{course_code} #{course_name}"
   end
+
 end

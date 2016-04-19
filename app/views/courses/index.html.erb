@@ -12,7 +12,7 @@
     <% @courses.each do |course| %>
       <tr>
         <td><%= course.course_code %> </td>
-        <td><%= course.course_name%></td>
+        <td><%= link_to course.course_name, course%></td>
       </tr>
     <% end %>
   </tbody>

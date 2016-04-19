@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   get 'courses/index'
+  get 'courses/show'
+
+  resources :courses
 
   devise_for :users
   resources :users, only: [:show]
@@ -14,8 +17,8 @@ Rails.application.routes.draw do
   end
 
 
-  
-  
+
+
 
   # resources :users, only: [:index, :show] do
   #   resources :lectures
