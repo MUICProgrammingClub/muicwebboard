@@ -5,6 +5,7 @@
     <tr>
       <th> Course code </th>
       <th> Course name </th>
+      <th> Lecture amount </th>
     </tr>
   </thead>
 
@@ -14,6 +15,7 @@
       <tr>
         <td><%= course.course_code %> </td>
         <td><%= link_to course.course_name, course%></td>
+        <td><%= course.lectures.count %></td>
       </tr>
       <% end %>
     <% end %>
