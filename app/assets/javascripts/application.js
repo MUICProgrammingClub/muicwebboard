@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require bootstrap.min
 //= require select2.full.min
+//= require fake-select
 //= require_tree .

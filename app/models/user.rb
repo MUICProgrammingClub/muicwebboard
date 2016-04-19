@@ -30,4 +30,9 @@ class User < ActiveRecord::Base
   has_many :lectures
   has_many :lecture_files
   has_many :reviews
+  searchkick
+
+  def full_name
+  	"#{first_name} #{last_name}"
+  end
 end
