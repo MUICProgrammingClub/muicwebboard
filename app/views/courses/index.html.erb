@@ -10,10 +10,12 @@
 
   <tbody>
     <% @courses.each do |course| %>
+      <% if course.lectures.any? %>
       <tr>
         <td><%= course.course_code %> </td>
         <td><%= link_to course.course_name, course%></td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
