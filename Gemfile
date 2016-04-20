@@ -16,6 +16,7 @@ gem 'paperclip'
 gem 'quiet_assets'
 gem 'will_paginate', '~> 3.0.6'
 gem 'will_paginate-bootstrap'
+gem 'cancancan', '~> 1.10'
 
 group :development, :test do
   gem 'byebug'
