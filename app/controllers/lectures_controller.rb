@@ -5,17 +5,7 @@ class LecturesController < ApplicationController
   # GET /lectures.json
   def index
     if params[:q].present? 
-        if params[:filter] == "0"
-          @lectures = Lecture.search params[:q], page: params[:page], per_page: 30
-        elsif params[:filter] == "1"
-          @lectures = Lecture.search params[:q], fields: [:lecture_name], page: params[:page], per_page: 30
-        elsif params[:filter] == "2"
-          @lectures = Lecture.search params[:q], fields: [:course_name] , page: params[:page], per_page: 30
-        elsif params[:filter] == "3"
-           @lectures = Lecture.search params[:q], fields: [:instructor_name], page: params[:page], per_page: 30
-        else
-           @lectures = Lecture.search params[:q], fields: [:user_name], page: params[:page], per_page: 30
-        end
+      @lectures = Lecture.search params[:q], page: params[:page], per_page: 30
     else
       @lectures = Lecture.search "*", field: [:lecture_name, :chapter, :course_name, :instructor_name], page: params[:page], per_page: 30
     end

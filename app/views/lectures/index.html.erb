@@ -1,22 +1,6 @@
-<script>
-  jQuery(document).ready(function($) {
-    $('.fake-select').fakeSelect();
-  });
-</script>
+
 <h1>All Lectures</h1>
-<div class="form-group">
-  <%= form_tag("/", method: "get") do %>
-  <div class="input-group">
-    <div class="input-group-btn">
-        <%= select_tag(:filter, options_for_select( [['All', 0], ['Lecture Name', 1], ['Courses', 2], ['Instructor', 3], ['User', 4]] ), {:class => 'fake-select'}) %>
-    </div>
-    <%= text_field_tag :q, "", class:'form-control' %>
-    <span class="input-group-btn">
-    <%= submit_tag "search", class:'btn btn-default' %>
-    </span>
-  </div>
-  <% end %>
-</div>
+
 <table class="table table-striped">
   <thead>
     <tr>
