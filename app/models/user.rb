@@ -30,7 +30,6 @@ class User < ActiveRecord::Base
   has_many :lectures
   has_many :lecture_files
   has_many :reviews
-<<<<<<< HEAD
   has_many :user_roles
 
   after_create :assign_role
@@ -42,7 +41,6 @@ class User < ActiveRecord::Base
       member_role = Role.find_by(name: "member")
       UserRole.create!(user_id: self.id, role_id: member_role[:id])
     end
-=======
   searchkick
 
   def full_name
