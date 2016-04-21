@@ -42,9 +42,7 @@ class User < ActiveRecord::Base
       UserRole.create!(user_id: self.id, role_id: member_role[:id])
     end
   searchkick
-
   def full_name
   	"#{first_name} #{last_name}"
   end
->>>>>>> search_and_misc
 end
