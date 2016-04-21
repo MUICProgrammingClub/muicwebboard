@@ -26,11 +26,12 @@ class Lecture < ActiveRecord::Base
   searchkick word_start: [:name], course_name: ["course_name"], instructor_name: ["instructor_name"], user_name: ["user_name"]
 
   def search_data
-  	{
+  	attributes.merge(
   		course_name: course(&:full_name),
   		instructor_name: instructor(&:full_name),
-  		user_name: user(&:full_name)
-  	}
+  		user_name: user(&:full_name),
+  		term_name: term(&:term_formatted)
+  	)
   		
   end
 

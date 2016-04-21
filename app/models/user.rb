@@ -41,6 +41,7 @@ class User < ActiveRecord::Base
       member_role = Role.find_by(name: "member")
       UserRole.create!(user_id: self.id, role_id: member_role[:id])
     end
+    
   searchkick
   def full_name
   	"#{first_name} #{last_name}"

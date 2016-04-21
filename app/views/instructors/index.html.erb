@@ -4,17 +4,19 @@
   <thead>
     <tr>
       <th> First name </th>
-      <th> Last name </th>
-
+      <th> Last name </th> 
+      <th> Total Lectures </th>
     </tr>
   </thead>
 
   <tbody>
     <% @instructors.each do |instructor| %>
       <tr>
+        <% if instructor.lectures.any? %>
         <td><%= instructor.first_name %> </td>
         <td><%= instructor.last_name %></td>
         <td><%= link_to instructor.lectures.count, instructor %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

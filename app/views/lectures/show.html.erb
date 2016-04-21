@@ -129,6 +129,8 @@
   <% end %> 
   </div>
 <div class="well well-lg">
+<h2> Lecture Reviews </h2>
+ <% if @lecture.reviews.any? %>
   <div class="well ">
       <% @lecture.reviews.each do |review| %>
         <p style="text-align: right;"> 
@@ -155,6 +157,7 @@
         <% end %>
       <% end %>
   </div>
+  <% end %>
 <div>
 
 </div>
