@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get 'instructors/show'
 
+  resources :instructors
   get 'courses/index'
   get 'courses/show'
 
