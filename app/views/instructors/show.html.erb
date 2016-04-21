@@ -1,2 +1,62 @@
-<h1>Instructors#show</h1>
-<p>Find me in app/views/instructors/show.html.erb</p>
+<h4><%= link_to 'Back to All Instructors', instructors_path %></h4>
+<h3><%= @instructor.first_name %> <%= @instructor.last_name %></h1>
+</br>
+<% if @instructor.lectures.any? %>
+  <h4> Lectures (<%= @instructor.lectures.count %>) </h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th> Thumbnail </th>
+        <th>Share by</th>
+        <th >Instructor</th>
+        <th >Term</th>
+        <th >Lecture name</th>
+        <th >Chapter</th>
+        <th > Average rating </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @instructor.lectures.each do |lecture| %>
+        <tr>
+          <td>
+          <% if !lecture.lecture_files.first.nil? %>
+          <% if lecture.lecture_files.first.image.content_type.include? "image" %>
+              <%= link_to image_tag(lecture.lecture_files.first.image.url, width: 100, height: 150), lecture %>
+          <% else %>
+              <%= link_to image_tag(lecture.lecture_files.first.image.url(:pdf_thumbnail), width: 100, height: 150), lecture %>
+          <% end %>
+          <% end %>
+          </td>
+          <td><%= link_to lecture.user.first_name, user_path(lecture.user.id) %></td>
+          <td><%= lecture.instructor.first_name %></td>
+          <td><%= lecture.term.term_formatted %></td>
+          <td><%= link_to lecture.lecture_name, lecture %></td>
+          <td><%= lecture.chapter %></td>
+          <td>
+            <% total = 0 %>
+            <% n = 0 %>
+            <% lecture.reviews.each do |review| %>
+              <% if !review.rating.nil? %>
+                <% total += review.rating %>
+                <% n += 1 %>
+              <% end %>
+            <% end %>
+            <% if total != 0 %>
+
+            <% (1..5).each do |i| %>
+                  <% if i <= total/n %>
+                    <span class="glyphicon glyphicon-star"></span>
+                  <% else %>
+                    <span class= "glyphicon glyphicon-star-empty"></span>
+                  <% end %>
+            <% end %>
+            <% else %>
+              There are currently no review
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<%end%>
