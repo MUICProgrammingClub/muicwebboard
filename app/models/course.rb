@@ -11,9 +11,8 @@
 
 class Course < ActiveRecord::Base
   has_many :lectures
-
   def name_code
   		"#{course_code} #{course_name}"
   end
-
+  searchkick word_start: [:name]
 end

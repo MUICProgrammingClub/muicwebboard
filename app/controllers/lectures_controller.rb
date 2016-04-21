@@ -4,7 +4,11 @@ class LecturesController < ApplicationController
   # GET /lectures
   # GET /lectures.json
   def index
-    @lectures = Lecture.all
+    if params[:q].present? 
+      @lectures = Lecture.search params[:q], page: params[:page], per_page: 30
+    else
+      @lectures = Lecture.search "*", field: [:lecture_name, :chapter, :course_name, :instructor_name], page: params[:page], per_page: 30
+    end
   end
 
   # GET /lectures/1
