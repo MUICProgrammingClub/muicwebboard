@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160419070702) do
+ActiveRecord::Schema.define(version: 20160422081803) do
 
   create_table "courses", force: :cascade do |t|
     t.text     "course_code"
@@ -114,6 +114,10 @@ ActiveRecord::Schema.define(version: 20160419070702) do
     t.text     "last_name"
     t.integer  "student_id_number"
     t.text     "phone_number"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

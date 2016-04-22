@@ -1,13 +1,18 @@
 <div class="container">
 <div class="well">
-<h1> User Profile </h1>
-
-<strong>Name:</strong><%= @user.first_name %> <%= @user.last_name %><br>
-<strong>Email: </strong> <%= @user.email %><br>
-
-<strong> Class: <%= @user.student_id_number.div(10000) %></strong> <br> 
-<strong> Phone Number: </strong> <%= @user.phone_number %> <br>
-<%= link_to 'Edit Registration Info', edit_user_registration_path %>
+  <div class="row">
+    <div class="col-md-8">
+      <h1> User Profile </h1>
+      <strong>Name:</strong><%= @user.first_name %> <%= @user.last_name %><br>
+      <strong>Email: </strong> <%= @user.email %><br>
+      <strong> Class: <%= @user.student_id_number.div(10000) %></strong> <br> 
+      <strong> Phone Number: </strong> <%= @user.phone_number %> <br>
+      <%= link_to 'Edit Registration Info', edit_user_registration_path %>
+    </div>
+    <div class="col-md-4">
+      <%= image_tag @user.avatar(:medium) %> <br>
+    </div>
+</div>
 </div>
 </div>
 
