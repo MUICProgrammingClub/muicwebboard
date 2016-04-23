@@ -1,0 +1,45 @@
+<script type="text/javascript">
+$(document).ready(function() {
+  $(".js-tags").select2({
+    tags: true
+  });
+});
+</script>
+<%= form_for(@work) do |f| %>
+  <% if @work.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@work.errors.count, "error") %> prohibited this work from being saved:</h2>
+
+      <ul>
+      <% @work.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.hidden_field :user_id %>
+  <div class="form-group">
+    <%= f.label :category %><br>
+    <%= f.select(:category, options_for_select([['Tutor', 'tutor'], ['Other', 'other']])) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :type %><br>
+    <%= f.select(:type, options_for_select([['Request for Work', 'RequestWork'], ['Hire Work', 'HireWork']]),) %>
+  </div>
+  <div class="form-group">
+    tags the courses or subject <br>
+    <%= f.collection_select :course_tag_list, Course.all,:name_code, :name_code, {prompt: 'Select Tag'}, {class: 'js-tags'} %>
+  </div>
+  <div class="form-group">
+    tags other kind of work <br>
+    <%= f.collection_select :other_tag_list, Tagging.includes(:tag).where(context: 'other_tags').map 
+    {|tagging| {'id' => tagging.tag_id.to_s, 'name' => tagging.tag.name}}.uniq, :name, :name, {prompt: 'Select Tag'}, {class: 'js-tags'} %> 
+  </div>
+  <div class="form-group">
+    <%= f.label :content %><br>
+    <%= f.text_area :content, class: 'form-control' %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

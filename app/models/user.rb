@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
   has_many :lecture_files
   has_many :reviews
   has_many :user_roles
+  has_many :works
 
   belongs_to :major
 
