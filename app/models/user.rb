@@ -19,6 +19,13 @@
 #  last_name              :text
 #  student_id_number      :integer
 #  phone_number           :text
+#  avatar_file_name       :string
+#  avatar_content_type    :string
+#  avatar_file_size       :integer
+#  avatar_updated_at      :datetime
+#  line                   :text
+#  facebook               :text
+#  major_id               :integer
 #
 
 class User < ActiveRecord::Base
@@ -32,6 +39,8 @@ class User < ActiveRecord::Base
   has_many :reviews
   has_many :user_roles
 
+  belongs_to :major
+
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.jpg"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
@@ -44,7 +53,7 @@ class User < ActiveRecord::Base
       member_role = Role.find_by(name: "member")
       UserRole.create!(user_id: self.id, role_id: member_role[:id])
     end
-    
+
   searchkick
   def full_name
   	"#{first_name} #{last_name}"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160422081803) do
+ActiveRecord::Schema.define(version: 20160423075819) do
 
   create_table "courses", force: :cascade do |t|
     t.text     "course_code"
@@ -61,6 +61,13 @@ ActiveRecord::Schema.define(version: 20160422081803) do
   add_index "lectures", ["instructor_id"], name: "index_lectures_on_instructor_id"
   add_index "lectures", ["term_id"], name: "index_lectures_on_term_id"
   add_index "lectures", ["user_id"], name: "index_lectures_on_user_id"
+
+  create_table "majors", force: :cascade do |t|
+    t.text     "major_name"
+    t.text     "major_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "user_id"
@@ -118,9 +125,13 @@ ActiveRecord::Schema.define(version: 20160422081803) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.text     "line"
+    t.text     "facebook"
+    t.integer  "major_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["major_id"], name: "index_users_on_major_id"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

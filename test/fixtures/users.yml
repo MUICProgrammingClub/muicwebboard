@@ -19,6 +19,13 @@
 #  last_name              :text
 #  student_id_number      :integer
 #  phone_number           :text
+#  avatar_file_name       :string
+#  avatar_content_type    :string
+#  avatar_file_size       :integer
+#  avatar_updated_at      :datetime
+#  line                   :text
+#  facebook               :text
+#  major_id               :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
