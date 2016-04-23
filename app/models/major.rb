@@ -11,4 +11,7 @@
 
 class Major < ActiveRecord::Base
   has_many :users
+  def name_code
+  		"#{major_code} #{major_name}"
+  end
 end
