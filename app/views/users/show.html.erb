@@ -5,7 +5,8 @@
       <h1> User Profile </h1>
       <strong>Name:</strong><%= @user.first_name %> <%= @user.last_name %><br>
       <strong>Email: </strong> <%= @user.email %><br>
-      <strong> Class: <%= @user.student_id_number.div(10000) %></strong> <br> 
+      <strong>Major: </strong> <%= @user.major %><br>
+      <strong> Class: <%= @user.student_id_number.div(10000) %></strong> <br>
       <strong> Phone Number: </strong> <%= @user.phone_number %> <br>
       <%= link_to 'Edit Registration Info', edit_user_registration_path %>
     </div>
@@ -40,8 +41,8 @@
         <% if lecture.lecture_files.first.image.content_type.include? "image" %>
             <%= link_to image_tag(lecture.lecture_files.first.image.url, width: 100, height: 150), lecture %>
         <% else %>
-            <%= link_to image_tag(lecture.lecture_files.first.image.url(:pdf_thumbnail), width: 100, height: 150), lecture %>    
-        <% end %>  
+            <%= link_to image_tag(lecture.lecture_files.first.image.url(:pdf_thumbnail), width: 100, height: 150), lecture %>
+        <% end %>
         <% end %>
         </td>
         <td><%= lecture.course.course_name%></td>
@@ -59,19 +60,19 @@
             <% end %>
           <% end %>
           <% if total != 0 %>
-         
+
           <% (1..5).each do |i| %>
                 <% if i <= total/n %>
                   <span class="glyphicon glyphicon-star"></span>
                 <% else %>
                   <span class= "glyphicon glyphicon-star-empty"></span>
-                <% end %> 
+                <% end %>
           <% end %>
           <% else %>
-            There are currently no review 
+            There are currently no review
           <% end %>
         </td>
-         <% if current_user == lecture.user %> 
+         <% if current_user == lecture.user %>
         <td><%= link_to 'Edit', edit_lecture_path(lecture) %></td>
         <td><%= link_to 'Remove', lecture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% else %>
