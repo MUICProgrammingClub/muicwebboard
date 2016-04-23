@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  get 'majors/index'
+
+  get 'majors/show'
+
+  resources :majors
   get 'instructors/index'
 
   get 'instructors/show'

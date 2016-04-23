@@ -1,0 +1,19 @@
+<h1>All Majors</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th> Major code </th>
+      <th> Major name </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @majors.each do |major| %>
+      <tr>
+        <td><%= major.major_code %> </td>
+        <td><%= link_to major.major_name, major%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
