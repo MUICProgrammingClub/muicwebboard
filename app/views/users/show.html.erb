@@ -2,13 +2,16 @@
 <div class="well">
   <div class="row">
     <div class="col-md-8">
-      <h1> User Profile </h1>
-      <strong>Name:</strong><%= @user.first_name %> <%= @user.last_name %><br>
-      <strong>Email: </strong> <%= @user.email %><br>
-      <strong>Major: </strong> <%= @user.major %><br>
-      <strong> Class: <%= @user.student_id_number.div(10000) %></strong> <br>
-      <strong> Phone Number: </strong> <%= @user.phone_number %> <br>
-      <%= link_to 'Edit Registration Info', edit_user_registration_path %>
+      <h1><i class="fa fa-user fa-2x" aria-hidden="true"></i> User Profile </h1>
+      <p><strong>Name:</strong><%= @user.first_name %> <%= @user.last_name %> </p>
+      <p><i class="fa fa-envelope fa-lg" aria-hidden="true"></i> <strong>Email: </strong> <%= @user.email %></p>
+      <p><strong>Major: </strong> <%= @user.major.major_name %> (<%= @user.major.major_code %>)</p>
+      <p><strong> Class: </strong> <%= @user.student_id_number.div(10000) %> </p>
+      <p><i class="fa fa-phone-square fa-lg" aria-hidden="true"></i> <strong> Phone Number: </strong> <%= @user.phone_number %> </p>
+      <p><strong>Line id: </strong><%= @user.line %> </p>
+      <p><i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i> <strong>Facebook : </strong><%= 
+      link_to @user.facebook, @user.facebook %> <i class="fa fa-external-link" aria-hidden="true"></i> </p>
+      <p><%= link_to 'Edit Registration Info', edit_user_registration_path %> </p>
     </div>
     <div class="col-md-4">
       <%= image_tag @user.avatar(:medium) %> <br>

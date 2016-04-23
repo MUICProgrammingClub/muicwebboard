@@ -7,8 +7,10 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-  	devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:first_name, :last_name, :student_id_number, :phone_number, :email, :password, :avatar)}
-    devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:first_name, :last_name, :student_id_number, :phone_number, :email, :password, :avatar, :current_password)}
+  	devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:first_name, :last_name, :student_id_number, :phone_number, 
+      :email, :password, :avatar, :line, :major_id, :facebook)}
+    devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:first_name, :last_name, :student_id_number, :phone_number, 
+      :email, :password, :avatar, :current_password, :facebook, :line, :major_id)}
   end
 
   private
