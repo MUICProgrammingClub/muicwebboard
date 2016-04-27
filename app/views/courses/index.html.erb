@@ -1,5 +1,9 @@
-<h1>All Courses</h1>
 
+
+<h1>Courses</h1>
+</br>
+<button type="button" class="btn btn-default" id = "btn1"><%= link_to 'All courses', courses_path %></button>
+<button type="button" class="btn btn-default" id = "btn2"><%= link_to 'Only course that have lectures', :action => :index, :filter => "with_lecture"  %></button>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -8,16 +12,7 @@
       <th> Lecture amount </th>
     </tr>
   </thead>
-
-  <tbody>
-    <% @courses.each do |course| %>
-      <% if course.lectures.any? %>
-      <tr>
-        <td><%= course.course_code %> </td>
-        <td><%= link_to course.course_name, course%></td>
-        <td><%= course.lectures.count %></td>
-      </tr>
-      <% end %>
-    <% end %>
-  </tbody>
+    <div id = div1>
+    <%= render 'allcourse' %>
+  </div>
 </table>

@@ -1,6 +1,8 @@
 class CoursesController < ApplicationController
   def index
-    @courses = Course.all
+    filter = params[:filter]
+    @courses = filter=="with_lecture" ? Course.joins(:lectures).uniq.all : Course.all
+    #@courses = Course.all
   end
 
   def show
