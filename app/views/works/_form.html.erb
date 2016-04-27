@@ -1,9 +1,30 @@
 <script type="text/javascript">
-$(document).ready(function() {
-  $(".js-tags").select2({
-    tags: true
+
+  function catChange() {
+    var elt = document.getElementById('cat');
+    var sel = elt.options[elt.selectedIndex].value;
+    if(sel === "tutor"){
+      $(".js-tag-course").prop("disabled", false);
+      $('#other-clear').select2().val(null).trigger('change')
+      $(".js-tag-other").prop("disabled", true);
+    }else{
+      $(".js-tag-course").prop("disabled", true);
+      $('#course-clear').select2().val(null).trigger('change')
+      $(".js-tag-other").prop("disabled", false);
+    }
+  }
+
+  $(document).ready(function() {
+    $(".js-tags").select2({
+      tags: true
+    });
+
+    $(".js-normal").select2({
+      minimumResultsForSearch: Infinity
+    })
+
   });
-});
+
 </script>
 <%= form_for(@work) do |f| %>
   <% if @work.errors.any? %>
@@ -20,26 +41,25 @@ $(document).ready(function() {
   <%= f.hidden_field :user_id %>
   <div class="form-group">
     <%= f.label :category %><br>
-    <%= f.select(:category, options_for_select([['Tutor', 'tutor'], ['Other', 'other']])) %>
+    <%= f.select(:category, options_for_select([['Tutor', 'tutor'], ['Other', 'other']]), {prompt: 'Select one'}, {:class => 'js-normal', :onchange => 'catChange()', :id => 'cat'}) %>
   </div>
   <div class="form-group">
     <%= f.label :type %><br>
-    <%= f.select(:type, options_for_select([['Request for Work', 'RequestWork'], ['Hire Work', 'HireWork']]),) %>
+    <%= f.select(:type, options_for_select([['Request for Work', 'RequestWork'], ['Hire Work', 'HireWork']]), {:prompt => 'Select one'}, {:class => 'js-normal'}) %>
   </div>
   <div class="form-group">
     tags the courses or subject <br>
-    <%= f.collection_select :course_tag_list, Course.all,:name_code, :name_code, {prompt: 'Select Tag'}, {class: 'js-tags'} %>
+    <%= select_tag :course_tag_list, options_from_collection_for_select(Course.all,:id, :name_code), multiple: true, class: 'js-tags js-tag-course', id: 'course-clear'%>
   </div>
   <div class="form-group">
     tags other kind of work <br>
-    <%= f.collection_select :other_tag_list, Tagging.includes(:tag).where(context: 'other_tags').map 
-    {|tagging| {'id' => tagging.tag_id.to_s, 'name' => tagging.tag.name}}.uniq, :name, :name, {prompt: 'Select Tag'}, {class: 'js-tags'} %> 
+    <%= select_tag :other_tag_list, options_from_collection_for_select(Instructor.all, :id, :full_name), multiple: true, class:'js-tags js-tag-other', id: 'other-clear' %> 
   </div>
   <div class="form-group">
     <%= f.label :content %><br>
     <%= f.text_area :content, class: 'form-control' %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-danger' %>
   </div>
 <% end %>

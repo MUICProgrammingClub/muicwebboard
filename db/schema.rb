@@ -154,15 +154,6 @@ ActiveRecord::Schema.define(version: 20160423163412) do
   add_index "users", ["major_id"], name: "index_users_on_major_id"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
-  create_table "work_tags", force: :cascade do |t|
-    t.integer  "work_id"
-    t.text     "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "work_tags", ["work_id"], name: "index_work_tags_on_work_id"
-
   create_table "works", force: :cascade do |t|
     t.text     "category"
     t.text     "type"

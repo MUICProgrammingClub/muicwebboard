@@ -33,6 +33,7 @@ class LecturesController < ApplicationController
   # POST /lectures
   # POST /lectures.json
   def create
+    Lecture.reindex
     @lecture = Lecture.new(lecture_params)
     @lecture.user = current_user
     respond_to do |format|
