@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 
-  get 'static_pages/index'
+  get  "Home" => "static_pages#index"
 
   get 'static_pages/show'
 
+  resources :static_pages
   get 'majors/index'
 
   get 'majors/show'
@@ -23,7 +24,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users, only: [:show]
 
-  root to: "lectures#index"
+  root to: "static_pages#index"
   resources :reviews, only: [:create, :destroy, :update]
 
   resources :lectures do

@@ -1,9 +1,9 @@
 
 
-<h1>Courses</h1>
+<h2>Courses</h2>
 </br>
-<button type="button" class="btn btn-default" id = "btn1"><%= link_to 'All courses', courses_path %></button>
-<button type="button" class="btn btn-default" id = "btn2"><%= link_to 'Only course that have lectures', :action => :index, :filter => "with_lecture"  %></button>
+<%= link_to 'All courses', courses_path ,class:"btn btn-default",id:"btn1"%>
+<%= link_to 'Only course that have lectures', :action => :index, :filter => "with_lecture", :class => "btn btn-default",:id=>"btn2" %>
 <table class="table table-striped">
   <thead>
     <tr>

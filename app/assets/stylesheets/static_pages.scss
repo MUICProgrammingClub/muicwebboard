@@ -1,3 +1,40 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+.title-orange{
+  color: #FBB03B;
+}
+.title-white{
+  color: #fff;
+}
+
+.title-darkerorange{
+  color: #F15A24;
+}
+h1 {
+  font-size: 4.5em;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+.center {
+  text-align: center;
+}
+h3{
+  letter-spacing: -0.5px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.bg-color-grey {
+  background-color: #eee;
+  border-bottom-color: #eee;
+}
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

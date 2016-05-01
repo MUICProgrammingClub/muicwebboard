@@ -8,11 +8,17 @@
 </head>
 <body>
 
-<%= render 'layouts/navtop' %>
+    <%= render 'layouts/navtop' %>
 
-<div class="container">
-<%= yield %>
-</div>
+
+<% if request.path != root_path && request.path != static_pages_path %>
+  <div class="container">
+  <%= yield %>
+  </div>
+<%else%>
+  <%= yield %>
+<%end%>
+
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>
 </html>
