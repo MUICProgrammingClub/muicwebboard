@@ -1,0 +1,23 @@
+<% @lectures_admin.each do |lecture| %>
+      <tr>
+        <td>
+        <% if !lecture.lecture_files.first.nil? %>
+        <% if lecture.lecture_files.first.image.content_type.include? "image" %>
+            <%= link_to image_tag(lecture.lecture_files.first.image.url, width: 100, height: 150), lecture %>
+        <% else %>
+            <%= link_to image_tag(lecture.lecture_files.first.image.url(:pdf_thumbnail), width: 100, height: 150), lecture %>    
+        <% end %>  
+        <% end %>
+        </td>
+        <td><%= link_to lecture.user.first_name, user_path(lecture.user.id) %></td>
+        <td><%= lecture.course.course_code %> <%= lecture.course.course_name%></td>
+        <td><%= lecture.instructor.first_name %></td>
+        <td><%= lecture.term.term_formatted %></td>
+        <td><%= link_to lecture.lecture_name, lecture %></td>
+        <td><%= lecture.chapter %></td>
+        <td><%= link_to 'Delete', lecture, method: :delete, data: { confirm: 'Are you sure?' } %> |
+            <%= link_to 'Approve', approved_lecture_path(lecture.id), method: :post %> 
+
+        </td>
+      </tr>
+<% end %>

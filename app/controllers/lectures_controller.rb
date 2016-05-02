@@ -1,14 +1,19 @@
 class LecturesController < ApplicationController
+  load_and_authorize_resource
   before_action :authenticate_user!, :set_lecture, only: [:show, :edit, :update, :destroy]
 
   # GET /lectures
   # GET /lectures.json
   def index
+    Lecture.reindex
+    @user_role = UserRole.find(current_user)
     if params[:q].present? 
-      @lectures = Lecture.search params[:q], page: params[:page], per_page: 30
+      @lectures = Lecture.search params[:q], where:{approve: true}, page: params[:page], per_page: 30
     else
-      @lectures = Lecture.search "*", field: [:lecture_name, :chapter, :course_name, :instructor_name], page: params[:page], per_page: 30
+      @lectures = Lecture.search "*", where:{approve: true}, field: [:lecture_name, :chapter, :course_name, :instructor_name], page: params[:page], per_page: 30
     end
+
+    @lectures_admin = Lecture.search "*", where:{approve: [nil, false]}, page: params[:page], per_page: 20
   end
 
   # GET /lectures/1
@@ -28,6 +33,14 @@ class LecturesController < ApplicationController
 
   def edit_review
     redirect_to lecture_path(:edited => (params[:edited] == '1'))
+  end
+
+  def approved
+    @lecture = Lecture.find(params[:id])
+    @lecture.approve = true
+    @lecture.save
+    @lectures = Lecture.all
+    redirect_to lectures_path
   end
 
   # POST /lectures
@@ -89,6 +102,6 @@ class LecturesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lecture_params
-      params.require(:lecture).permit(:user_id, :course_id, :instructor_id, :term_id, :lecture_name, :chapter, :description, :file)
+      params.require(:lecture).permit(:user_id, :course_id, :instructor_id, :term_id, :lecture_name, :chapter, :description, :file, :approve)
     end
 end

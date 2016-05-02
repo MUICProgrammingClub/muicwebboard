@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :lectures do
   	member do
   		put :edit_review
+      post :approved
   	end
   end
 

@@ -12,9 +12,11 @@
 #  description   :text
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  approve       :boolean
 #
 
 class Lecture < ActiveRecord::Base
+
   belongs_to :user
   belongs_to :course
   belongs_to :instructor
@@ -22,6 +24,8 @@ class Lecture < ActiveRecord::Base
 
   has_many :lecture_files, :dependent => :destroy
   has_many :reviews, :dependent => :destroy
+
+  after_create :assign_approve_status
 
   searchkick word_start: [:name], course_name: ["course_name"], instructor_name: ["instructor_name"], user_name: ["user_name"]
 
@@ -35,6 +39,10 @@ class Lecture < ActiveRecord::Base
   		
   end
 
-  
+  private
+
+  def assign_approve_status
+    self.approve = false
+  end
 
 end

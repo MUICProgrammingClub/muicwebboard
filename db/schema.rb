@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160423075819) do
+ActiveRecord::Schema.define(version: 20160502132937) do
 
   create_table "courses", force: :cascade do |t|
     t.text     "course_code"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20160423075819) do
     t.text     "description"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.boolean  "approve"
   end
 
   add_index "lectures", ["course_id"], name: "index_lectures_on_course_id"
@@ -87,6 +88,26 @@ ActiveRecord::Schema.define(version: 20160423075819) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "taggings", force: :cascade do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
+
+  create_table "tags", force: :cascade do |t|
+    t.string  "name"
+    t.integer "taggings_count", default: 0
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true
 
   create_table "terms", force: :cascade do |t|
     t.text     "term_formatted"
@@ -133,5 +154,19 @@ ActiveRecord::Schema.define(version: 20160423075819) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["major_id"], name: "index_users_on_major_id"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "works", force: :cascade do |t|
+    t.text     "category"
+    t.text     "type"
+    t.text     "content"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text     "course_tag"
+    t.text     "other_tag"
+    t.text     "title"
+  end
+
+  add_index "works", ["user_id"], name: "index_works_on_user_id"
 
 end
