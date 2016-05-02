@@ -14,20 +14,6 @@
 				</ul>
 			</li>
 			<% if request.path != root_path && request.path != static_pages_path %>
-				<li>
-	  			<%= form_tag(lectures_path(params[:q]), method: "get", class: "navbar-form") do %>
-	  				<div class="input-group">
-	   			    <%= text_field_tag :q, "", class:'form-control' %>
-	   		    <span class="input-group-btn">
-	    			<%= button_tag "search", class:'btn btn-default' do
-	    				content_tag(:span, '' , :class=>'glyphicon glyphicon-search')
-	    			end
-	    			 %>
-	   		    </span>
-	  				</div>
-	  			<% end %>
-
-				</li>
 				<a class="navbar-brand" href=<%= root_path %>> IC NETWORK </a>
 			<% end %>
 		</ul>

@@ -1,18 +1,25 @@
 </br>
 </br>
 <div class="container">
+    <a href=<%= root_path %> >
   	<h1><span class="title-orange center"> IC</span>
       <span class="title-darkerorange center">network </span>
     </h1>
+    </a>
     </br>
   	<div class="col-md-6 col-md-offset-3">
   	<div class="col-lg-16">
-	  <div class="input-group">
-		    	<input class="form-control" type="text">
-		    	<span class="input-group-btn">
-		    	<button class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-		    	</span>
-		</div>
+		    	<%= form_tag(static_pages_show_path(params[:q]), method: "get") do %>
+            <div class="input-group">
+              <%= text_field_tag :q, "", class:'form-control' %>
+            <span class="input-group-btn">
+            <%= button_tag "search", class:'btn btn-default' do
+              content_tag(:span, '' , :class=>'glyphicon glyphicon-search')
+            end
+             %>
+            </span>
+            </div>
+          <% end %>
 	  </div>
 	  </br>
     </div>

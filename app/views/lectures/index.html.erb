@@ -60,7 +60,7 @@
   </tbody>
 </table>
 
-<%= will_paginate @lectures %>
+<%= will_paginate @lectures, renderer: BootstrapPagination::Rails %>
 
 <br>
 <% if user_signed_in? %>

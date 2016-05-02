@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   def index
     filter = params[:filter]
-    @courses = filter=="with_lecture" ? Course.joins(:lectures).uniq.all : Course.all
+    @courses = filter=="with_lecture" ? Course.joins(:lectures).uniq.all.paginate(:page => params[:page], :per_page => 20) : Course.all.paginate(:page => params[:page], :per_page => 20)
     #@courses = Course.all
   end
 
