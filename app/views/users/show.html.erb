@@ -2,7 +2,7 @@
 <div class="well">
   <div class="row">
     <div class="col-md-8">
-      <h1><i class="fa fa-user fa-2x" aria-hidden="true"></i> User Profile </h1>
+      <h2><i class="fa fa-user fa-2x" aria-hidden="true"></i> User Profile </h2>
       <p><strong>Name:</strong><%= @user.first_name %> <%= @user.last_name %> </p>
       <p><i class="fa fa-envelope fa-lg" aria-hidden="true"></i> <strong>Email: </strong> <%= @user.email %></p>
       <p><strong>Major: </strong> <%= @user.major.major_name %> (<%= @user.major.major_code %>)</p>
@@ -11,6 +11,7 @@
       <p><strong>Line id: </strong><%= @user.line %> </p>
       <p><i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i> <strong>Facebook : </strong><%= 
       link_to @user.facebook, @user.facebook %> <i class="fa fa-external-link" aria-hidden="true"></i> </p>
+      <p> <strong>User Level: </strong> <%= @user_role.role.name %> </p>
       <p><%= link_to 'Edit Registration Info', edit_user_registration_path %> </p>
     </div>
     <div class="col-md-4">
