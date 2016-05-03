@@ -11,4 +11,6 @@
 
 class Role < ActiveRecord::Base
   has_many :user_roles
+
+  validates :name, presence: true
 end

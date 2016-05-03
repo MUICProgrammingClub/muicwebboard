@@ -11,7 +11,11 @@
 
 class Major < ActiveRecord::Base
   has_many :users
-  def name_code 
+
+  validates :major_name, presence: true
+  validates :major_code, presence: true
+
+  def name_code
   	"#{major_code} #{major_name}"
   end
 end

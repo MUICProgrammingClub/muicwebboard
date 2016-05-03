@@ -20,6 +20,10 @@
 class LectureFile < ActiveRecord::Base
   belongs_to :lecture
   belongs_to :user
+
+  validates :lecture_id, presence: true
+  validates :user_id, presence: true
+
   has_attached_file :image, :styles => { :pdf_thumbnail => ["", :jpg], :thumb => "100x100#", :medium => "200x200" }
   validates_attachment :image, :content_type => {:content_type => %w(image/jpeg image/jpg image/png image/gif application/pdf)}
 

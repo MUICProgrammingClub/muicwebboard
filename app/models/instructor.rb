@@ -11,8 +11,12 @@
 
 class Instructor < ActiveRecord::Base
   has_many :lectures
+
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+
   searchkick word_start: [:name]
-  def full_name 
+  def full_name
   	"#{first_name} #{last_name}"
   end
 end

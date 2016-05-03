@@ -11,8 +11,12 @@
 
 class Course < ActiveRecord::Base
   has_many :lectures
+
+  validates :course_code, presence: true
+  validates :course_name, presence: true
+
   def name_code
-  		"#{course_code} #{course_name}"
+    "#{course_code} #{course_name}"
   end
   searchkick word_start: [:name]
 end
