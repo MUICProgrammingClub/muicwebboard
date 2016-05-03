@@ -25,6 +25,13 @@ class Lecture < ActiveRecord::Base
   has_many :lecture_files, :dependent => :destroy
   has_many :reviews, :dependent => :destroy
 
+  validates :user_id, presence: true
+  validates :course_id, presence: true
+  validates :instructor_id, presence: true
+  validates :term_id, presence: true
+  validates :lecture_name, presence: true
+  validates :chapter, presence: true
+
   after_create :assign_approve_status
 
   searchkick word_start: [:name], course_name: ["course_name"], instructor_name: ["instructor_name"], user_name: ["user_name"]
@@ -36,7 +43,7 @@ class Lecture < ActiveRecord::Base
   		user_name: user(&:full_name),
   		term_name: term(&:term_formatted)
   	)
-  		
+
   end
 
   private

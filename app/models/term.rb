@@ -10,4 +10,6 @@
 
 class Term < ActiveRecord::Base
   has_many :lectures
+
+  validates :term_formatted, presence: true
 end
