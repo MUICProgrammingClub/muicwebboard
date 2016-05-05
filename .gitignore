@@ -18,3 +18,5 @@
 
 # Ignore images
 /public/system/*
+
+.DS_Store
