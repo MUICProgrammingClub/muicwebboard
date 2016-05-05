@@ -1,6 +1,8 @@
 #!/bin/bash
 RAILS_ENV=production rake db:migrate
 RAILS_ENV=production rails runner "Course.reindex"
+RAILS_ENV=production rails runner "Instructor.reindex"
+RAILS_ENV=production rails runner "Lecture.reindex"
 
 RAILS_ENV=production rake add_all_course:seed
 RAILS_ENV=production rake add_all_instructor:seed
