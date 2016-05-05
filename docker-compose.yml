@@ -1,0 +1,17 @@
+version: '2'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "webboard"
+      POSTGRES_USER: "muic"
+      POSTGRES_DB: "muicwebboard_production"
+  elasticsearch:
+    image: elasticsearch
+  web:
+    build: .
+    ports:
+      - "80:3000"
+    links:
+      - db
+      - elasticsearch
