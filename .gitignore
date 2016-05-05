@@ -5,18 +5,18 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
-/.bundle
+/webapp/.bundle
 
 # Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-journal
+/webapp/db/*.sqlite3
+/webapp/db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
-/log/*
-!/log/.keep
-/tmp
+/webapp/log/*
+!/webapp/log/.keep
+/webapp/tmp
 
 # Ignore images
-/public/system/*
+/webapp/public/system/*
 
 .DS_Store
