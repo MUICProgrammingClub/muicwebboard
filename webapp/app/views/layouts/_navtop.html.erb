@@ -28,7 +28,7 @@
               <ul class="dropdown-menu">
                 <li><%= link_to '<span class="glyphicon glyphicon-edit"></span> Edit User Profile'.html_safe, edit_user_registration_path %></li>
                 <li><%= link_to '<span class="glyphicon glyphicon-user"></span> Your Profile'.html_safe, user_path(current_user.id) %></li>
-                <li><%= link_to '<span class="glyphicon glyphicon-log-out"></span> Sign Out'.html_safe, destroy_user_session_path, :method => :delete %>
+                <li><%= link_to '<span class="glyphicon glyphicon-log-out"></span> Sign Out'.html_safe, destroy_user_session_path, :method => :delete, :flash => {:notice => "You have successfully logout"} %>
               </ul>
             </li>
 		<% else %>

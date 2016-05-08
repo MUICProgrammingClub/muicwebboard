@@ -7,7 +7,7 @@ class LecturesController < ApplicationController
   def index
     Lecture.reindex
     if current_user.nil?
-      redirect_to user_session_path
+      redirect_to user_session_path, :flash => {:error => "You need to be login before accessing this page"}
     else
       @user_role = UserRole.find(current_user)
     end

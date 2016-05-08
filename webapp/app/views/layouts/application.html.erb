@@ -14,11 +14,38 @@
     <%= render 'layouts/navtop' %>
 
 
+
 <% if request.path != root_path && request.path != static_pages_path %>
   <div class="container">
+  <% if !flash[:error].nil?  %>
+    <div class="alert alert-warning">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close"> &times; </a>
+        <p id="error"><%= flash[:error] %></p>
+    </div>
+  <% end %>
+  <% if !flash[:notice].nil? %>
+    <div class="alert alert-info">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close"> &times; </a>
+      <p id="notice"><%= flash[:notice] %> </p>
+    </div>
+  <% end %>
   <%= yield %>
   </div>
 <%else%>
+<div class="container">
+<% if !flash[:notice].nil? %>
+    <div class="alert alert-info">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close"> &times; </a>
+      <p id="notice"><%= flash[:notice] %> </p>
+    </div>
+<% end %>
+<% if !flash[:error].nil?  %>
+    <div class="alert alert-warning">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close"> &times; </a>
+        <p id="error"><%= flash[:error] %></p>
+    </div>
+<% end %>
+</div>
   <%= yield %>
 <%end%>
 
