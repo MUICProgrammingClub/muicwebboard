@@ -6,7 +6,11 @@ class LecturesController < ApplicationController
   # GET /lectures.json
   def index
     Lecture.reindex
-    @user_role = UserRole.find(current_user)
+    if current_user.nil?
+      redirect_to user_session_path
+    else
+      @user_role = UserRole.find(current_user)
+    end
     if params[:q].present? 
       @lectures = Lecture.search params[:q], where:{approve: true}, page: params[:page], per_page: 30
     else
