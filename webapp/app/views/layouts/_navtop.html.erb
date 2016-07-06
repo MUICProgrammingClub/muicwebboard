@@ -10,6 +10,9 @@
 					<li><%= link_to 'Lectures', lectures_path %></li>
 					<li><%= link_to 'Courses', courses_path %></li>
 					<li><%= link_to 'Instructor', instructors_path %></li>
+					<% if can? :update, @lectures %>
+					<li><%= link_to 'User Management', users_path %></li>
+					<%end%>
 
 				</ul>
 			</li>

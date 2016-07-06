@@ -3,6 +3,7 @@
 </br>
 <% if @instructor.lectures.any? %>
   <h4> Lectures (<%= @instructor.lectures.count %>) </h4>
+  <p> The count include both approve and unapprove lectures </p>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -18,6 +19,7 @@
 
     <tbody>
       <% @instructor.lectures.each do |lecture| %>
+        <% if lecture.approve %>
         <tr>
           <td>
           <% if !lecture.lecture_files.first.nil? %>
@@ -56,6 +58,7 @@
             <% end %>
           </td>
         </tr>
+      <% end %>
       <% end %>
     </tbody>
   </table>

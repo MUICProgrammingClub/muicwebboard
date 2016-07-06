@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   resources :courses
 
   devise_for :users
-  resources :users, only: [:show]
+  resources :users, only: [:show, :index]
 
   root to: "static_pages#index"
   resources :reviews, only: [:create, :destroy, :update]

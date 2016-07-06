@@ -5,4 +5,9 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@lectures_admin = Lecture.search "*", where:{approve: [nil, false], user_id: @user.id}, page: params[:page], per_page: 20
 	end
+
+	def index 
+		@user = User.all.paginate(:page => params[:page], :per_page => 20)
+		@user_role = UserRole.all
+	end
 end

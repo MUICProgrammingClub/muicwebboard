@@ -1,0 +1,49 @@
+<h2> Simple User Management </h2>
+<p> Use it for now I am too lazy to write a better one </p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th> Firstname </th>
+      <th> Lastname </th>
+      <th> Student ID </th>
+      <th> Line </th>
+      <th> Facebook </th>
+      <th> User Level </th>
+      <th colspan="2"> Option </th>
+    </tr>
+  </thead>
+    <tbody>
+      <% @user.each do |u| %>
+      <tr>
+        <td><%= u.first_name %></td>
+        <td><%= u.last_name %></td>
+        <td><%= u.student_id_number %></td>
+        <td><%= u.line %></td>
+        <td><%= u.facebook %></td>
+        <td>
+          <% urole = "" %>
+          <% @user_role.each do |ur| %>
+            <% if ur.user_id == u.id %>
+              <% urole = ur %>
+            <% end %>
+          <% end %>
+          <%= urole.role.name %>
+        </td>
+        <td> <%= link_to 'Go to Profile', user_path(u.id) %> </td>
+        <% if u != current_user %>
+        <td> <%= link_to 'Remove User', u, method: :delete, data: { confirm: 'Are you sure?' } %> 
+        <% if urole.role.name != 'admin' %>
+          <!-- will implement later when I have a life -->
+          | <%= link_to 'Make Admin', '#' %>
+        <% end %>
+        </td>
+        <% else %>
+        <td> Cannot remove yourself!</td>
+        <% end %>
+      </tr>
+      <%end%>
+    </tbody>
+  </div>
+</table>
+
+<%= will_paginate @user, renderer: BootstrapPagination::Rails %>
