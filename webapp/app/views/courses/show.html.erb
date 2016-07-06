@@ -2,7 +2,14 @@
 <h3><%= @course.course_code %> <%= @course.course_name %></h1>
 </br>
 <% if @course.lectures.any? %>
-  <h4> Lectures (<%= @course.lectures.count %>) </h4>
+  <!-- count the total number of real approve lectures -->
+  <% real_lecture = 0 %>
+  <% @course.lectures.each do |lecture| %>
+      <% if lecture.approve == true %>
+        <% real_lecture+=1 %>
+      <% end %>
+  <% end %>
+  <h4> Lectures (<%= real_lecture %>) </h4>
   <table class="table table-striped">
     <thead>
       <tr>

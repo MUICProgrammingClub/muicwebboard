@@ -1,6 +1,7 @@
 <tbody>
   <% @course.lectures.each do |lecture| %>
     <tr>
+      <% if lecture.approve == true %>
       <td>
       <% if !lecture.lecture_files.first.nil? %>
       <% if lecture.lecture_files.first.image.content_type.include? "image" %>
@@ -35,6 +36,7 @@
         <% end %>
         <% else %>
           There are currently no review
+        <% end %>
         <% end %>
       </td>
     </tr>

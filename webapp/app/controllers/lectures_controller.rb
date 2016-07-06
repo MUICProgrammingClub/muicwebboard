@@ -59,7 +59,8 @@ class LecturesController < ApplicationController
             @lecture.lecture_files.create(image: file, user_id: current_user.id)
           }
         end
-        format.html { redirect_to @lecture, notice: 'Lecture was successfully created.' }
+        format.html { redirect_to @lecture, notice: 'Lecture was successfully created. please wait for 
+          your lecture to be approve by our staff' }
         format.json { render :show, status: :created, location: @lecture }
       else
         format.html { render :new }
